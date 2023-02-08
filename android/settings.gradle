@@ -1,0 +1,10 @@
+rootProject.name = "solguard"
+
+include ":app"
+
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
+
+// Rename each child "build.gradle" file to be the name of the module
+rootProject.children.each { subproject ->
+    subproject.buildFileName = "${subproject.name}.gradle"
+}

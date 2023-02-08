@@ -1,0 +1,53 @@
+plugins {
+    id "com.android.application"
+    id "org.jetbrains.kotlin.android"
+}
+
+android {
+    compileSdk 33
+
+    namespace "com.dgsd.solguard"
+
+    defaultConfig {
+        applicationId "com.dgsd.solguard"
+        minSdk 28
+        targetSdk 33
+        versionCode 1
+        versionName "1.0"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            applicationIdSuffix ".debug"
+            versionNameSuffix "-debug"
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+        freeCompilerArgs += [
+                "-Xopt-in=kotlinx.coroutines.ExperimentalCoroutinesApi",
+                "-Xopt-in=kotlinx.coroutines.ObsoleteCoroutinesApi"
+        ]
+    }
+}
+
+dependencies {
+    implementation libs.appcompat
+    implementation libs.androidx.fragment.ktx
+    implementation libs.androidx.lifecycle.process
+    implementation libs.koin.android
+    implementation libs.google.material
+    implementation libs.shimmer.android
+    implementation libs.lottie
+    implementation libs.coil
+
+    testImplementation libs.android.junit
+}

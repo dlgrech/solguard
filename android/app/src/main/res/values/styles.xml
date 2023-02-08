@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="SolGuardAppBarLayout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:clipChildren">false</item>
+        <item name="android:background">@null</item>
+        <item name="android:fitsSystemWindows">true</item>
+    </style>
+
+    <style name="SolGuardToolbar">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">?attr/actionBarSize</item>
+        <item name="android:clipChildren">false</item>
+        <item name="android:background">?android:windowBackground</item>
+        <item name="android:textAppearance">@style/TextAppearance.SolGuard.Title3</item>
+        <item name="contentInsetEnd">@dimen/padding_default</item>
+        <item name="contentInsetStart">@dimen/padding_default</item>
+        <item name="navigationIconTint">?colorOnBackground</item>
+        <item name="titleTextAppearance">@style/TextAppearance.SolGuardCollapsingToolbar.Collapsed
+        </item>
+    </style>
+
+    <style name="SolGuardToolbar.Collapsable">
+        <item name="android:elevation">0dp</item>
+        <item name="layout_collapseMode">pin</item>
+    </style>
+
+    <style name="SolGuardCollapsingToolbarLayout" parent="Widget.Material3.CollapsingToolbar.Large">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">?attr/collapsingToolbarLayoutLargeSize</item>
+        <item name="collapsedTitleTextAppearance">
+            @style/TextAppearance.SolGuardCollapsingToolbar.Collapsed
+        </item>
+        <item name="contentScrim">?android:windowBackground</item>
+        <item name="expandedTitleTextAppearance">
+            @style/TextAppearance.SolGuardCollapsingToolbar.Expanded
+        </item>
+        <item name="layout_scrollFlags">scroll|exitUntilCollapsed</item>
+        <item name="titleCollapseMode">scale</item>
+    </style>
+
+    <style name="SolGuardToolbarItem">
+        <item name="android:layout_width">@dimen/clickable_element_min_height</item>
+        <item name="android:layout_height">@dimen/clickable_element_min_height</item>
+        <item name="android:background">?selectableItemBackgroundBorderless</item>
+        <item name="android:padding">@dimen/padding_small</item>
+        <item name="tint">?android:textColorPrimary</item>
+    </style>
+
+
+    <style name="TextAppearance.Link" parent="TextAppearance.SolGuard.Label2">
+        <item name="android:textColor">?colorPrimary</item>
+        <item name="android:gravity">center</item>
+        <item name="android:minHeight">@dimen/clickable_element_min_height</item>
+    </style>
+
+    <style name="PrimaryButton" parent="Widget.Material3.Button">
+        <item name="android:minHeight">56dp</item>
+        <item name="android:textAppearance">@style/TextAppearance.SolGuard.Label2</item>
+        <item name="fontFamily">@font/saira_semicondensed_600</item>
+    </style>
+
+    <style name="TextAppearance.PageInstruction" parent="TextAppearance.SolGuard.Label1">
+        <item name="android:textColor">?android:textColorSecondary</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_marginHorizontal">@dimen/padding_xlarge</item>
+        <item name="android:layout_marginBottom">@dimen/padding_large</item>
+    </style>
+
+
+</resources>
