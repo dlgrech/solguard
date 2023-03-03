@@ -1,0 +1,22 @@
+CREATE TABLE UnlockAppEventRecord (
+ packageName TEXT NOT NULL,
+ timestamp INTEGER NOT NULL,
+ transactionSignature TEXT NOT NULL,
+ launchNumber INTEGER NOT NULL,
+ amountPaid INTEGER NOT NULL,
+ tokenAddress TEXT NOT NULL
+);
+
+selectAll:
+SELECT *
+FROM UnlockAppEventRecord
+ORDER BY timestamp DESC;
+
+getByPackageAndTimeRange:
+SELECT *
+FROM UnlockAppEventRecord
+WHERE packageName = :packageName AND timestamp >= :minTime AND timestamp <= :maxTime;
+
+insert:
+INSERT OR REPLACE INTO UnlockAppEventRecord
+VALUES ?;

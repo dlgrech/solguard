@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:ignore="MissingConstraints">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar_layout"
+        style="@style/SolGuardAppBarLayout">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/collapsing_toolbar_layout"
+            style="@style/SolGuardCollapsingToolbarLayout">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/toolbar"
+                style="@style/SolGuardToolbar.Collapsable"
+                app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
+                app:title="@string/main_tab_screen_title_settings"
+                app:titleCentered="true" />
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <com.dgsd.solguard.common.view.FadingEdgeNestedScrollView
+            android:id="@+id/settings_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:fillViewport="true"
+            android:paddingTop="@dimen/padding_default"
+            android:paddingBottom="@dimen/padding_default"
+            android:requiresFadingEdge="vertical">
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipChildren="false"
+                android:orientation="vertical">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/settings_row_default_payment_token"
+                    style="@style/AppSettingsRow"
+                    android:background="@drawable/rounded_rect_top_only_section_color">
+
+                    <TextView
+                        android:id="@+id/settings_value_default_payment_token"
+                        style="@style/AppSettingsRowValue"
+                        app:layout_constraintStart_toEndOf="@id/settings_title_default_payment_token" />
+
+                    <TextView
+                        android:id="@+id/settings_title_default_payment_token"
+                        style="@style/AppSettingsRowTitle"
+                        android:text="@string/settings_title_default_payment_token"
+                        app:layout_constraintBottom_toTopOf="@id/settings_description_default_payment_token"
+                        app:layout_constraintEnd_toStartOf="@id/settings_value_default_payment_token"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/settings_description_default_payment_token"
+                        style="@style/AppSettingsRowDescription"
+                        android:text="@string/settings_description_default_payment_token"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/settings_value_default_payment_token"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/settings_title_default_payment_token" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <View style="@style/AppSettingsDivider" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/settings_row_increase_payment_on_each_unlock"
+                    style="@style/AppSettingsRow"
+                    android:background="@color/section_color">
+
+                    <TextView
+                        android:id="@+id/settings_value_increase_payment_on_each_unlock"
+                        style="@style/AppSettingsRowValue"
+                        app:layout_constraintStart_toEndOf="@id/settings_title_increase_payment_on_each_unlock" />
+
+                    <TextView
+                        android:id="@+id/settings_title_increase_payment_on_each_unlock"
+                        style="@style/AppSettingsRowTitle"
+                        android:text="@string/settings_title_increase_payment_on_each_unlock"
+                        app:layout_constraintBottom_toTopOf="@id/settings_description_increase_payment_on_each_unlock"
+                        app:layout_constraintEnd_toStartOf="@id/settings_value_increase_payment_on_each_unlock"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/settings_description_increase_payment_on_each_unlock"
+                        style="@style/AppSettingsRowDescription"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/settings_value_increase_payment_on_each_unlock"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/settings_title_increase_payment_on_each_unlock" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <View style="@style/AppSettingsDivider" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/settings_row_show_warning_notification"
+                    style="@style/AppSettingsRow"
+                    android:background="@color/section_color">
+
+                    <TextView
+                        android:id="@+id/settings_value_show_warning_notification"
+                        style="@style/AppSettingsRowValue"
+                        app:layout_constraintStart_toEndOf="@id/settings_title_show_warning_notification" />
+
+                    <TextView
+                        android:id="@+id/settings_title_show_warning_notification"
+                        style="@style/AppSettingsRowTitle"
+                        android:text="@string/settings_title_show_warning_notification"
+                        app:layout_constraintBottom_toTopOf="@id/settings_description_show_warning_notification"
+                        app:layout_constraintEnd_toStartOf="@id/settings_value_show_warning_notification"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/settings_description_show_warning_notification"
+                        style="@style/AppSettingsRowDescription"
+                        android:text="@string/settings_description_show_warning_notification"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/settings_value_show_warning_notification"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/settings_title_show_warning_notification" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <View style="@style/AppSettingsDivider" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/settings_row_show_time_remaining_notification"
+                    style="@style/AppSettingsRow"
+                    android:background="@color/section_color">
+
+                    <TextView
+                        android:id="@+id/settings_value_show_time_remaining_notification"
+                        style="@style/AppSettingsRowValue"
+                        app:layout_constraintStart_toEndOf="@id/settings_title_show_time_remaining_notification" />
+
+                    <TextView
+                        android:id="@+id/settings_title_show_time_remaining_notification"
+                        style="@style/AppSettingsRowTitle"
+                        android:text="@string/settings_title_show_time_remaining_notification"
+                        app:layout_constraintBottom_toTopOf="@id/settings_description_show_time_remaining_notification"
+                        app:layout_constraintEnd_toStartOf="@id/settings_value_show_time_remaining_notification"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/settings_description_show_time_remaining_notification"
+                        style="@style/AppSettingsRowDescription"
+                        android:text="@string/settings_description_show_time_remaining_notification"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/settings_value_show_time_remaining_notification"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/settings_title_show_time_remaining_notification" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <View style="@style/AppSettingsDivider" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/settings_row_show_suggestions_notification"
+                style="@style/AppSettingsRow"
+                android:background="@color/section_color">
+
+                <TextView
+                    android:id="@+id/settings_value_show_suggestions_notification"
+                    style="@style/AppSettingsRowValue"
+                    app:layout_constraintStart_toEndOf="@id/settings_title_show_suggestions_notification" />
+
+                <TextView
+                    android:id="@+id/settings_title_show_suggestions_notification"
+                    style="@style/AppSettingsRowTitle"
+                    android:text="@string/settings_title_show_suggestions_notification"
+                    app:layout_constraintBottom_toTopOf="@id/settings_description_show_suggestions_notification"
+                    app:layout_constraintEnd_toStartOf="@id/settings_value_show_suggestions_notification"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/settings_description_show_suggestions_notification"
+                    style="@style/AppSettingsRowDescription"
+                    android:text="@string/settings_description_show_suggestions_notification"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/settings_value_show_suggestions_notification"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/settings_title_show_suggestions_notification" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <View style="@style/AppSettingsDivider" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/settings_row_donation_to_solguard"
+                    style="@style/AppSettingsRow"
+                    android:background="@drawable/rounded_rect_bottom_only_section_color">
+
+                    <TextView
+                        android:id="@+id/settings_value_donation_to_solguard"
+                        style="@style/AppSettingsRowValue"
+                        app:layout_constraintStart_toEndOf="@id/settings_title_donation_to_solguard" />
+
+                    <TextView
+                        android:id="@+id/settings_title_donation_to_solguard"
+                        style="@style/AppSettingsRowTitle"
+                        android:text="@string/settings_title_donation_to_solguard"
+                        app:layout_constraintBottom_toTopOf="@id/settings_description_donation_to_solguard"
+                        app:layout_constraintEnd_toStartOf="@id/settings_value_donation_to_solguard"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/settings_description_donation_to_solguard"
+                        style="@style/AppSettingsRowDescription"
+                        android:text="@string/settings_description_donation_to_solguard"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/settings_value_donation_to_solguard"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/settings_title_donation_to_solguard" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </LinearLayout>
+        </com.dgsd.solguard.common.view.FadingEdgeNestedScrollView>
+
+        <ProgressBar
+            android:id="@+id/loading_indicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone" />
+
+    </FrameLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

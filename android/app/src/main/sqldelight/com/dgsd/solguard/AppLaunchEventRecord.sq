@@ -1,0 +1,25 @@
+CREATE TABLE AppLaunchRecord (
+ packageName TEXT NOT NULL,
+ epochDay INTEGER NOT NULL,
+ launchCount INTEGER NOT NULL,
+ UNIQUE (packageName, epochDay)
+);
+
+selectAll:
+SELECT *
+FROM AppLaunchRecord
+ORDER BY epochDay DESC;
+
+insert:
+INSERT OR REPLACE INTO AppLaunchRecord
+VALUES ?;
+
+getAllOnDate:
+SELECT *
+FROM AppLaunchRecord
+WHERE epochDay = :epochDay;
+
+getCountByPackageNameAndDate:
+SELECT launchCount
+FROM AppLaunchRecord
+WHERE packageName = :packageName AND epochDay = :epochDay;

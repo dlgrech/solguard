@@ -2,8 +2,10 @@ package com.dgsd.solguard
 
 import android.app.Application
 import android.os.StrictMode
+import com.dgsd.solguard.common.viewmodel.ViewModelActivityHolder
 import com.dgsd.solguard.di.AppModule
 import com.dgsd.solguard.di.ViewModelModule
+import com.dgsd.solguard.onboarding.di.OnboardingModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -23,11 +25,14 @@ class SolGuardApplication : Application() {
       modules(
         AppModule.create(),
         ViewModelModule.create(),
+        OnboardingModule.create(),
       )
     }
 
     if (BuildConfig.DEBUG) {
       StrictMode.enableDefaults()
     }
+
+    registerActivityLifecycleCallbacks(ViewModelActivityHolder)
   }
 }

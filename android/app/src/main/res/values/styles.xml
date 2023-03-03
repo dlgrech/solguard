@@ -13,7 +13,7 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">?attr/actionBarSize</item>
         <item name="android:clipChildren">false</item>
-        <item name="android:background">?android:windowBackground</item>
+        <item name="android:background">@null</item>
         <item name="android:textAppearance">@style/TextAppearance.SolGuard.Title3</item>
         <item name="contentInsetEnd">@dimen/padding_default</item>
         <item name="contentInsetStart">@dimen/padding_default</item>
@@ -29,7 +29,7 @@
 
     <style name="SolGuardCollapsingToolbarLayout" parent="Widget.Material3.CollapsingToolbar.Large">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">?attr/collapsingToolbarLayoutLargeSize</item>
+        <item name="android:layout_height">250dp</item>
         <item name="collapsedTitleTextAppearance">
             @style/TextAppearance.SolGuardCollapsingToolbar.Collapsed
         </item>
@@ -37,6 +37,8 @@
         <item name="expandedTitleTextAppearance">
             @style/TextAppearance.SolGuardCollapsingToolbar.Expanded
         </item>
+        <item name="expandedTitleGravity">center</item>
+        <item name="collapsedTitleGravity">start|center_vertical</item>
         <item name="layout_scrollFlags">scroll|exitUntilCollapsed</item>
         <item name="titleCollapseMode">scale</item>
     </style>
@@ -46,7 +48,7 @@
         <item name="android:layout_height">@dimen/clickable_element_min_height</item>
         <item name="android:background">?selectableItemBackgroundBorderless</item>
         <item name="android:padding">@dimen/padding_small</item>
-        <item name="tint">?android:textColorPrimary</item>
+        <item name="tint">?colorOnBackground</item>
     </style>
 
 
@@ -59,7 +61,7 @@
     <style name="PrimaryButton" parent="Widget.Material3.Button">
         <item name="android:minHeight">56dp</item>
         <item name="android:textAppearance">@style/TextAppearance.SolGuard.Label2</item>
-        <item name="fontFamily">@font/saira_semicondensed_600</item>
+        <item name="fontFamily">@font/source_sans_pro_600</item>
     </style>
 
     <style name="TextAppearance.PageInstruction" parent="TextAppearance.SolGuard.Label1">
@@ -67,6 +69,86 @@
         <item name="android:gravity">center</item>
         <item name="android:layout_marginHorizontal">@dimen/padding_xlarge</item>
         <item name="android:layout_marginBottom">@dimen/padding_large</item>
+    </style>
+
+    <style name="TextAppearance.SplashMessage" parent="TextAppearance.SolGuard.Label1">
+        <item name="android:textColor">?android:textColorSecondary</item>
+        <item name="android:gravity">center</item>
+        <item name="android:lineSpacingExtra">2sp</item>
+        <item name="android:layout_marginHorizontal">@dimen/padding_xlarge</item>
+        <item name="android:layout_marginBottom">@dimen/padding_large</item>
+    </style>
+
+    <style name="TextAppearance.BottomSheetTitle" parent="TextAppearance.SolGuard.Title3">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/padding_small</item>
+        <item name="android:minHeight">@dimen/clickable_element_min_height</item>
+        <item name="android:gravity">center</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+    <style name="PrimaryButton.Onboarding">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">@dimen/padding_large</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+    </style>
+
+    <style name="AppSettingsRow">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginHorizontal">@dimen/padding_default</item>
+        <item name="android:padding">@dimen/padding_default</item>
+        <item name="android:foreground">?selectableItemBackground</item>
+        <item name="android:background">@color/section_color</item>
+        <item name="android:elevation">@dimen/elevation_default</item>
+        <item name="android:outlineProvider">background</item>
+    </style>
+
+    <style name="AppSettingsRowTitle" parent="TextAppearance.SolGuard.Label2">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginEnd">@dimen/padding_small</item>
+        <item name="layout_constraintHorizontal_bias">0</item>
+        <item name="layout_constraintWidth_percent">0.8</item>
+    </style>
+
+    <style name="AppSettingsRowDescription" parent="TextAppearance.SolGuard.Label5">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/padding_xsmall</item>
+        <item name="android:layout_marginEnd">@dimen/padding_small</item>
+        <item name="android:textColor">?android:textColorSecondary</item>
+        <item name="layout_constraintHorizontal_bias">0</item>
+        <item name="layout_constraintWidth_percent">0.8</item>
+    </style>
+
+    <style name="AppSettingsRowValue" parent="TextAppearance.SolGuard.Label1">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">?android:textColorTertiary</item>
+        <item name="android:gravity">center</item>
+        <item name="layout_constraintBottom_toBottomOf">parent</item>
+        <item name="layout_constraintEnd_toEndOf">parent</item>
+        <item name="layout_constraintTop_toTopOf">parent</item>
+    </style>
+
+    <style name="AppSettingsDivider">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1px</item>
+        <item name="android:layout_marginHorizontal">@dimen/padding_default</item>
+    </style>
+
+    <style name="CreateGuardInputText" parent="Base.TextAppearance.SolGuard">
+        <item name="android:paddingVertical">@dimen/padding_xsmall</item>
+        <item name="fontFamily">@font/source_sans_pro_600</item>
+        <item name="android:lineSpacingExtra">24dp</item>
+        <item name="android:textSize">38sp</item>
+    </style>
+
+    <style name="ExistingGuardInputText" parent="TextAppearance.SolGuard.Title3">
+        <item name="fontFamily">@font/source_sans_pro_400</item>
     </style>
 
 

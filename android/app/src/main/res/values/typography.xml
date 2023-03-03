@@ -2,7 +2,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
     <style name="Base.TextAppearance.SolGuard" parent="TextAppearance.AppCompat">
-        <item name="fontFamily">@font/saira_semicondensed_400</item>
+        <item name="fontFamily">@font/source_sans_pro_400</item>
         <item name="android:textColor">?android:textColorPrimary</item>
         <item name="android:includeFontPadding">false</item>
     </style>
@@ -11,31 +11,31 @@
         <item name="android:textSize">64sp</item>
         <item name="android:lastBaselineToBottomHeight" tools:ignore="NewApi">0dp</item>
         <item name="android:firstBaselineToTopHeight" tools:ignore="NewApi">0dp</item>
-        <item name="fontFamily">@font/saira_semicondensed_700</item>
+        <item name="fontFamily">@font/source_sans_pro_700</item>
     </style>
 
     <style name="TextAppearance.SolGuard.Title1" parent="Base.TextAppearance.SolGuard">
         <item name="android:textSize">32sp</item>
         <item name="android:lineSpacingExtra">4sp</item>
-        <item name="fontFamily">@font/saira_semicondensed_700</item>
+        <item name="fontFamily">@font/source_sans_pro_700</item>
     </style>
 
     <style name="TextAppearance.SolGuard.Title2" parent="Base.TextAppearance.SolGuard">
         <item name="android:textSize">28sp</item>
         <item name="android:lineSpacingExtra">4sp</item>
-        <item name="fontFamily">@font/saira_semicondensed_700</item>
+        <item name="fontFamily">@font/source_sans_pro_700</item>
     </style>
 
     <style name="TextAppearance.SolGuard.Title3" parent="Base.TextAppearance.SolGuard">
         <item name="android:textSize">24sp</item>
         <item name="android:lineSpacingExtra">2sp</item>
-        <item name="fontFamily">@font/saira_semicondensed_600</item>
+        <item name="fontFamily">@font/source_sans_pro_600</item>
     </style>
 
     <style name="TextAppearance.SolGuard.Title4" parent="Base.TextAppearance.SolGuard">
         <item name="android:textSize">18sp</item>
         <item name="android:lineSpacingExtra">2sp</item>
-        <item name="fontFamily">@font/saira_semicondensed_600</item>
+        <item name="fontFamily">@font/source_sans_pro_600</item>
     </style>
 
     <style name="TextAppearance.SolGuard.Label1" parent="Base.TextAppearance.SolGuard">
@@ -44,12 +44,12 @@
 
     <style name="TextAppearance.SolGuard.Label2" parent="Base.TextAppearance.SolGuard">
         <item name="android:textSize">16sp</item>
-        <item name="fontFamily">@font/saira_semicondensed_600</item>
+        <item name="fontFamily">@font/source_sans_pro_600</item>
     </style>
 
     <style name="TextAppearance.SolGuard.Label3" parent="Base.TextAppearance.SolGuard">
         <item name="android:textSize">16sp</item>
-        <item name="fontFamily">@font/saira_semicondensed_700</item>
+        <item name="fontFamily">@font/source_sans_pro_700</item>
     </style>
 
     <style name="TextAppearance.SolGuard.Label4" parent="Base.TextAppearance.SolGuard">
@@ -61,7 +61,7 @@
     </style>
 
     <style name="TextAppearance.SolGuardCollapsingToolbar.Expanded" parent="TextAppearance.SolGuard.Title1">
-        <item name="fontFamily">@font/saira_semicondensed_600</item>
+        <item name="fontFamily">@font/source_sans_pro_600</item>
     </style>
 
     <style name="TextAppearance.SolGuardCollapsingToolbar.Collapsed" parent="TextAppearance.SolGuard.Title3" />

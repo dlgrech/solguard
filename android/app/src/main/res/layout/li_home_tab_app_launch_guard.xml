@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clipChildren="false"
+    android:clipToPadding="false"
+    android:paddingHorizontal="@dimen/padding_default"
+    android:paddingBottom="@dimen/padding_default">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/background_actions"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="@dimen/padding_default"
+        android:paddingVertical="@dimen/padding_small"
+        app:cardElevation="0dp"
+        app:layout_constrainedHeight="true"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintBottom_toBottomOf="@id/card"
+        app:layout_constraintEnd_toEndOf="@id/card"
+        app:layout_constraintStart_toStartOf="@id/card"
+        app:layout_constraintTop_toTopOf="@id/card"
+        app:strokeWidth="0dp">
+
+        <LinearLayout
+            android:id="@+id/background_actions_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal"
+            android:paddingHorizontal="@dimen/padding_xlarge">
+
+            <LinearLayout
+                android:id="@+id/background_action_enable_disable"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="?selectableItemBackgroundBorderless"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/background_action_enable_disable_icon"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:padding="@dimen/padding_small"
+                    android:src="@drawable/ic_baseline_unpublished_24" />
+
+                <TextView
+                    android:id="@+id/background_action_enable_disable_text"
+                    style="@style/TextAppearance.SolGuard.Label2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/padding_xsmall"
+                    android:gravity="center"
+                    android:text="@string/home_app_launch_guard_disable" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/background_action_blackout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="?selectableItemBackgroundBorderless"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/background_action_blackout_icon"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:padding="@dimen/padding_small"
+                    android:src="@drawable/ic_baseline_shield_outline_24" />
+
+                <TextView
+                    android:id="@+id/background_action_blackout_text"
+                    style="@style/TextAppearance.SolGuard.Label2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/padding_xsmall"
+                    android:gravity="center"
+                    android:text="@string/home_app_launch_guard_blackout" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/background_action_delete"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="?selectableItemBackgroundBorderless"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/background_action_delete_icon"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:padding="@dimen/padding_small"
+                    android:src="@drawable/ic_baseline_delete_outline_24" />
+
+                <TextView
+                    android:id="@+id/background_action_delete_text"
+                    style="@style/TextAppearance.SolGuard.Label2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/padding_xsmall"
+                    android:gravity="center"
+                    android:text="@string/common_delete" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:foreground="?selectableItemBackground"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="@dimen/padding_default"
+        android:paddingVertical="@dimen/padding_small"
+        app:cardBackgroundColor="@color/section_color"
+        app:cardElevation="@dimen/elevation_default"
+        app:layout_constrainedHeight="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:strokeWidth="0dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/icon"
+                    android:layout_width="@dimen/home_tab_item_app_icon_size"
+                    android:layout_height="@dimen/home_tab_item_app_icon_size"
+                    android:layout_marginStart="@dimen/padding_small"
+                    android:padding="@dimen/home_tab_item_app_icon_padding" />
+
+                <TextView
+                    android:id="@+id/app_name"
+                    style="@style/TextAppearance.SolGuard.Title4"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:textColor="?colorOnSurfaceVariant" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/primary_message"
+                style="@style/ExistingGuardInputText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="@dimen/padding_default"
+                android:paddingVertical="@dimen/padding_small"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/header" />
+
+            <TextView
+                android:id="@+id/subtitle"
+                style="@style/TextAppearance.SolGuard.Label4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawablePadding="@dimen/padding_small"
+                android:ellipsize="end"
+                android:gravity="center_vertical"
+                android:paddingHorizontal="@dimen/padding_default"
+                android:paddingVertical="@dimen/padding_small"
+                android:textColor="?android:textColorSecondary"
+                app:drawableTint="?android:textColorSecondary"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/primary_message" />
+
+            <LinearLayout
+                android:id="@+id/blackout_mode_enabled_indicator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:padding="@dimen/padding_small"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/header">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:padding="@dimen/padding_xsmall"
+                    android:src="@drawable/ic_baseline_shield_outline_24"
+                    app:tint="?colorOnSurface" />
+
+                <TextView
+                    style="@style/TextAppearance.SolGuard.Title4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/home_tab_item_app_blackout_enabled"
+                    android:textColor="?colorOnSurface" />
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

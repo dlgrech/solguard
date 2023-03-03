@@ -7,5 +7,28 @@
     <dimen name="padding_default">16dp</dimen>
     <dimen name="padding_small">8dp</dimen>
     <dimen name="padding_xsmall">4dp</dimen>
+
+    <dimen name="elevation_default">4dp</dimen>
+
     <dimen name="clickable_element_min_height">48dp</dimen>
+
+    <dimen name="home_tab_item_app_icon_size">56dp</dimen>
+    <dimen name="home_tab_item_app_icon_padding">8dp</dimen>
+    <dimen name="home_tab_item_subtitle_icon_size">16dp</dimen>
+    <dimen name="home_tab_item_launch_guard_divider_padding">72dp</dimen>
+
+    <dimen name="app_icon_corner_radius">12dp</dimen>
+    <dimen name="section_corner_radius">16dp</dimen>
+
+    <dimen name="create_new_guard_app_icon_size">24dp</dimen>
+
+    <dimen name="onboarding_app_selection_app_icon_size">56dp</dimen>
+    <dimen name="onboarding_app_selection_app_icon_padding">8dp</dimen>
+
+    <dimen name="squiggly_text_stroke_width">2dp</dimen>
+    <dimen name="squiggly_text_wave_length">16dp</dimen>
+    <dimen name="squiggly_text_wave_length_error">120dp</dimen>
+    <dimen name="squiggly_text_wave_amplitude">1.6dp</dimen>
+
+    <dimen name="app_selection_item_divider_padding">72dp</dimen>
 </resources>

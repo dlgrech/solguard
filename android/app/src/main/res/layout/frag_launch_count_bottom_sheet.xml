@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingVertical="@dimen/padding_xxxlarge">
+
+    <TextView
+        style="@style/TextAppearance.SolGuard.Label1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="@dimen/padding_default"
+        android:gravity="center"
+        android:text="@string/create_new_guard_max_launches_description" />
+
+    <com.dgsd.solguard.common.view.NumberPickerView
+        android:id="@+id/limit_per_day"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/padding_default"
+        android:layout_marginVertical="@dimen/padding_default" />
+
+    <Button
+        android:id="@+id/done"
+        style="@style/PrimaryButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/common_done" />
+
+</LinearLayout>

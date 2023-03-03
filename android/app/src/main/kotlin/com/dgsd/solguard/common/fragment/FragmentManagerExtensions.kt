@@ -20,8 +20,10 @@ fun FragmentManager.navigate(
     @IdRes containerId: Int,
     fragment: Fragment,
     screenTransitionType: ScreenTransitionType = ScreenTransitionType.DEFAULT,
+    fragmentTag: String = fragment.generateTag(),
     resetBackStack: Boolean = false,
-    commitNow: Boolean = false
+    commitNow: Boolean = false,
+    addOnTop: Boolean = false
 ) {
     val transaction: (FragmentTransaction.() -> Unit) = {
         if (resetBackStack) {
@@ -32,7 +34,11 @@ fun FragmentManager.navigate(
             addToBackStack(fragment.generateTag())
         }
 
-        replace(containerId, fragment)
+        if (addOnTop) {
+            add(containerId, fragment, fragmentTag)
+        } else {
+            replace(containerId, fragment, fragmentTag)
+        }
         setPrimaryNavigationFragment(fragment)
     }
 
@@ -57,7 +63,12 @@ private fun FragmentTransaction.setScreenTransitionType(
         }
 
         ScreenTransitionType.FADE -> {
-            setCustomAnimations(R.anim.fade_in, R.anim.fade_out)
+            setCustomAnimations(
+                R.anim.fade_in,
+                R.anim.fade_out,
+                R.anim.fade_in,
+                R.anim.fade_out
+            )
         }
 
         ScreenTransitionType.SLIDE_FROM_BOTTOM -> {
@@ -66,6 +77,15 @@ private fun FragmentTransaction.setScreenTransitionType(
                 R.anim.fade_out,
                 R.anim.fade_in,
                 R.anim.slide_out_from_bottom,
+            )
+        }
+
+        ScreenTransitionType.SLIDE_FROM_RIGHT -> {
+            setCustomAnimations(
+                R.anim.slide_in_from_right,
+                R.anim.fade_out,
+                R.anim.fade_in,
+                R.anim.slide_out_to_right,
             )
         }
     }

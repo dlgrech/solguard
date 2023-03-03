@@ -6,5 +6,7 @@ enum class ScreenTransitionType {
 
   FADE,
 
-  SLIDE_FROM_BOTTOM
+  SLIDE_FROM_BOTTOM,
+
+  SLIDE_FROM_RIGHT,
 }

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?android:windowBackground"
+    android:orientation="vertical">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        style="@style/SolGuardToolbar.Collapsable"
+        app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
+        app:title="@string/onboarding_biometrics_screen_title"
+        app:titleCentered="true" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lottie_view"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_gravity="center_horizontal"
+        app:lottie_rawRes="@raw/fingerprint_verification" />
+
+    <TextView
+        android:id="@+id/message"
+        style="@style/TextAppearance.SplashMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/onboarding_biometrics_message" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <Button
+        android:id="@+id/next_button"
+        style="@style/PrimaryButton.Onboarding"
+        android:layout_marginBottom="@dimen/padding_default"
+        android:text="@string/onboarding_biometrics_primary_button" />
+
+</LinearLayout>

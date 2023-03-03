@@ -1,3 +1,178 @@
 <resources>
     <string name="app_name">SolGuard</string>
+
+    <string name="error_modal_default_title">There was a problem</string>
+    <string name="error_message_generic">Looks like something went wrong. Please try again.</string>
+
+    <string name="common_cancel">Cancel</string>
+    <string name="common_next">Next</string>
+    <string name="common_done">Done</string>
+    <string name="common_on">On</string>
+    <string name="common_off">Off</string>
+    <string name="common_nevermind">Nevermind</string>
+    <string name="common_enable">Enable</string>
+    <string name="common_save">Save</string>
+    <string name="common_delete">Delete</string>
+    <string name="common_settings">Settings</string>
+    <string name="common_success">Success!</string>
+    <string name="common_next_with_arrow">Next →</string>
+    <string name="common_are_you_sure">Are you sure?</string>
+    <plurals name="common_x_times">
+        <item quantity="one">%1$s time</item>
+        <item quantity="other">%1$s times</item>
+    </plurals>
+
+    <string name="home_overflow_menu_history">History</string>
+    <string name="home_overflow_menu_settings">Settings</string>
+
+    <string name="main_tab_screen_title_home">SolGuard</string>
+    <string name="main_tab_screen_title_history">History</string>
+    <string name="main_tab_screen_title_settings">Settings</string>
+
+    <string name="home_tab_section_title_existing">Existing Guards</string>
+    <string name="home_tab_section_title_suggested">Suggestions</string>
+    <string name="home_tab_section_title_installed_apps">Installed Apps</string>
+
+
+    <string name="home_tab_item_primary_message_template">If ^1 is opened more than ^2 times a day, i\'ll need to pay ^3 to continue using it</string>
+
+    <string name="home_tab_app_launch_guard_item_daily_limit_reached">You\'ve reached your daily limit</string>
+    <string name="home_tab_app_launch_guard_item_subtitle_disabled">This guard is disabled</string>
+    <string name="home_tab_app_launch_guard_item_subtitle_zero_launches">Not opened today</string>
+    <plurals name="home_tab_app_launch_guard_item_subtitle">
+        <item quantity="zero">@string/home_tab_app_launch_guard_item_subtitle_zero_launches</item>
+        <item quantity="one">Opened %1$s time today</item>
+        <item quantity="other">Opened %1$s times today</item>
+    </plurals>
+
+    <string name="create_new_guard_max_launches_title">Usage limit</string>
+    <string name="create_new_guard_max_launches_description">This is the number of times per day that you can open the app before we\'ll block you</string>
+    <string name="create_new_guard_token_description">This is how much you\'ll pay if you wish to exceed your daily limit</string>
+    <string name="create_new_guard_amount_input_description_template">Amount (%s)</string>
+    <string name="create_new_guard_amount_input_missing_error">Please enter a valid amount</string>
+    <string name="create_new_guard_success">New guard created!</string>
+    <string name="edit_guard_success">Saved!</string>
+    <string name="deleted_guard_success">Guard removed!</string>
+    <string name="app_block_screen_title">Hold up there…</string>
+    <string name="app_block_disable_blackout_mode_screen_title">Blackout mode is enabled</string>
+    <string name="app_block_screen_instruction_template">You\'ve hit your daily limit for ^1.\n\nYou wanted to limit yourself to ^2 uses, but you\'ve tried to open the app ^3 times.\n\nIf you ^4 want to use this app, you\'ll have to pay up ^5</string>
+    <string name="app_block_screen_instruction_blackout_template">You enabled blackout mode - you wanted to prevent yourself from opening all apps, including ^1.\n\nYou\'ll have to pay up ^2 to disable blackout mode, or wait until tomorrow.</string>
+    <string name="app_block_screen_instruction_blackout_only_template">If you wish to turn it off, you\'ll have to pay up ^1, or wait until tomorrow.</string>
+    <string name="app_block_screen_instruction_app_blackout_template">You enabled blackout mode for ^1.\n\nYou\'ll have to pay up ^2 to disable blackout mode, or wait until tomorrow.</string>
+    <string name="app_block_screen_instruction_really">really</string>
+    <string name="app_block_screen_pay_button">Pay to unlock</string>
+    <string name="app_block_unlock_memo_template">Unlock SolGuard to use ^1</string>
+    <string name="app_block_unlock_default_app">app</string>
+    <string name="app_block_unlock_success_message_template">You\'re free to use ^1 as much as you want in the next ^2 minutes</string>
+    <string name="app_block_disable_blackout_mode_success_message">Blackout mode has been disabled</string>
+    <string name="app_block_success_title">Good to go</string>
+    <string name="app_block_success_done_button">Done</string>
+    <string name="home_tab_item_enable_accessibility_service_message">We need permission in order to work properly. Click here to enable!</string>
+    <string name="create_new_guard_delete_guard">Remove this guard</string>
+    <string name="create_new_guard_delete_confirmation_message">Is this really what you want to do?\n\nThis will allow you to use the app as many times as you want.\n\nTry to remember why you originally set this up :)</string>
+
+    <string name="onboarding_splash_app_name">SolGuard</string>
+    <string name="onboarding_splash_message">Helping you break your addiction to this phone</string>
+    <string name="onboarding_splash_get_started">Get started</string>
+    <string name="onboarding_splash_how_it_works">How it works</string>
+
+    <string name="onboarding_mwa_check_screen_title">Wallet Integration</string>
+    <string name="onboarding_grant_permissions_screen_title">Permissions</string>
+    <string name="onboarding_grant_notifications_permissions_screen_title">Notifications</string>
+    <string name="onboarding_app_selection_screen_title">New Guard</string>
+    <string name="onboarding_amount_input_screen_title">How much?</string>
+    <string name="onboarding_app_launch_limit_screen_title">Launch Limit</string>
+    <string name="onboarding_mwa_check_message_template">This app integrates with the Solana Wallet you\'re already familiar with, like ^1. We never have access to your secret keys, so you\'re always in control.</string>
+    <string name="onboarding_mwa_check_message_no_wallets_template">This app integrates with a Solana Wallet to securely transact. You\'ll need to install one to use the app.\n\n^1</string>
+    <string name="onboarding_mwa_check_message_no_wallets_find_a_wallet">Find a wallet</string>
+
+    <string name="onboarding_grant_permissions_message">We need your permission to detect which apps you\'re opening.\n\nWe use this so that we can help you keep within your usage limits.\n\nWe take your security seriously and this sensitive data never leaves your device.</string>
+    <string name="onboarding_grant_permissions_primary_button">Grant permission →</string>
+    <string name="onboarding_grant_notifications_permissions_message">We can notify you when you\'re close to your limit for apps you choose.\n\nYou can always toggle this from settings later on.</string>
+    <string name="onboarding_guard_setup_splash_title">We\'re all set!</string>
+    <string name="onboarding_guard_setup_splash_message">Lets get going on creating your first guard</string>
+    <string name="onboarding_grant_notification_permissions_not_now">Not right now</string>
+    <string name="settings_title_default_payment_token">Default token</string>
+    <string name="settings_description_default_payment_token">This is the token we\'ll default to when creating a new guard.</string>
+    <string name="settings_title_increase_payment_on_each_unlock">Increasing Fee</string>
+    <string name="settings_description_increase_payment_on_each_unlock_template">Increase the fee you pay by ^1 each time you pay to unlock an app on the same day</string>
+    <string name="settings_title_show_warning_notification">Show warning notification</string>
+    <string name="settings_description_show_warning_notification">Show a notification when you\'re almost at your daily limit for an app</string>
+    <string name="settings_title_show_time_remaining_notification">Show time remaining notification</string>
+    <string name="settings_description_show_time_remaining_notification">Show a notification after you pay to unlock an app with how long left before you\'ll need to pay again to continue use.</string>
+    <string name="settings_title_show_suggestions_notification">Show suggestions notification</string>
+    <string name="settings_description_show_suggestions_notification">Show a notification when we detect a heavily used app that you may want to lock</string>
+    <string name="settings_title_donation_to_solguard">Donation to SolGuard</string>
+    <string name="settings_description_donation_to_solguard">A portion (that you choose) of each fee you pay will go towards supporting development of SolGuard</string>
+    <string name="settings_notification_permission_warning_title">We need your permission</string>
+    <string name="settings_notification_permission_warning_message">To show you this notification, we\'ll need permission to show you notifications</string>
+    <string name="settings_notification_permission_warning_positive_buttons">Grant Permission</string>
+    <string name="onboarding_app_selection_screen_message">Let\'s create a new guard.\n\nSelect an app that you want to limit.</string>
+    <string name="onboarding_app_launch_limit_screen_message_template">How many times a day would you like to limit yourself to when using ^1?</string>
+    <string name="home_tab_create_new_entrypoint">Create New</string>
+    <string name="enable_blackout_mode_screen_title">Blackout Mode</string>
+    <string name="enable_blackout_mode_explanation">Limit the launch of any app for the rest of the day.\n\nThe only way to turn this off will be to pay the fee you set below.</string>
+    <string name="enable_blackout_mode_amount_input_description_template">Amount (%s)</string>
+    <string name="enable_blackout_mode_success_message">Blackout mode enabled!</string>
+    <string name="enable_blackout_mode_amount_input_missing_error">Please enter a valid amount</string>
+    <string name="onboarding_amount_input_description_template">Amount (%s)</string>
+    <string name="onboarding_amount_input_missing_error">Please enter a valid amount</string>
+    <string name="onboarding_amount_input_screen_message_zero_limit">How much do you want to pay as a penalty if you use ^1?</string>
+    <string name="onboarding_biometrics_screen_title">Secure your app</string>
+    <string name="onboarding_biometrics_message">Secure access to your settings with your biometric information</string>
+    <string name="onboarding_biometrics_primary_button">Secure my settings</string>
+    <plurals name="onboarding_amount_input_screen_message_template">
+        <item quantity="one">How much do you want to pay as a penalty if you use ^1 more than ^2 time in a day</item>
+        <item quantity="other">How much do you want to pay as a penalty if you use ^1 more than ^2 times in a day</item>
+    </plurals>
+    <string name="app_lock_entry_biometric_prompt_title">Verify that it\'s you</string>
+    <string name="app_lock_entry_biometric_prompt_message">We want to keep your data safe, so we ask to verify who you are to make sure only you have access</string>
+    <string name="onboarding_success_title">Success!</string>
+    <string name="onboarding_success_message">You\'re on your way to using your device less!\n\nEnter the app to continue your journey.</string>
+    <string name="unlock_app">Unlock</string>
+    <string name="blackout_mode_tile_label">Blackout Mode</string>
+    <string name="blackout_mode_add_tile_label">Toggle Blackout Mode</string>
+    <string name="history_item_unknown_app">Unknown app</string>
+    <string name="common_date_time_today">Today</string>
+    <string name="common_date_time_yesterday">Yesterday</string>
+    <string name="history_tab_summary_blackout_mode_enabled">Blackout mode was enabled</string>
+    <string name="history_tab_summary_blackout_mode_disabled_template">You paid ^1 to disable Blackout mode</string>
+    <string name="history_tab_summary_empty">Tap to see more info</string>
+    <plurals name="history_tab_summary_used_app_1">
+        <item quantity="one">You used ^1 ^2 time</item>
+        <item quantity="other">You used ^1 ^2 times</item>
+    </plurals>
+    <string name="history_tab_summary_used_app_2">You used ^1 and ^2</string>
+    <string name="history_tab_summary_used_app_3">You used ^1, ^2 and ^3</string>
+    <plurals name="history_tab_summary_used_app_multiple">
+        <item quantity="one">You used ^1, ^2, ^3 and ^4 other</item>
+        <item quantity="other">You used ^1, ^2, ^3 and ^4 others</item>
+    </plurals>
+
+    <string name="history_tab_summary_unlock_event_1">You paid ^1 to unlock ^2</string>
+    <string name="history_tab_summary_unlock_event_2">You paid to unlock ^1 and ^2</string>
+    <string name="history_tab_summary_unlock_event_3">You paid to unlock ^1, ^2 and ^3</string>
+    <string name="notification_channel_heavy_use_name">Suggestions</string>
+    <string name="notification_channel_heavy_use_description">Receive suggestions to block apps which you\'re using a lot</string>
+    <string name="notification_channel_app_unlocked_name">App Unlocks</string>
+    <string name="notification_channel_app_unlocked_description">See how long you\'re able to use an app after unlocking</string>
+    <plurals name="history_tab_summary_unlock_event_multiple">
+        <item quantity="one">You paid to unlock ^1, ^2, ^3 and ^4 other</item>
+        <item quantity="other">You paid to unlock ^1, ^2, ^3 and ^4 others</item>
+    </plurals>
+
+    <string name="notification_title_heavy_use_template">You\'ve used %1$s %2$s times today</string>
+    <string name="notification_title_heavy_use_description">Tap here to create a limit for yourself</string>
+
+    <string name="create_guard_input_text_template">When I open ^1 more than ^2 in a day, I will pay ^3</string>
+    <string name="create_guard_input_text_default_app_text">an app</string>
+    <string name="create_guard_input_text_default_payment_text">a fee</string>
+    <string name="app_selection_screen_title">Select app</string>
+    <string name="home_app_launch_guard_blackout">Blackout</string>
+    <string name="home_app_launch_guard_disable">Disable</string>
+    <string name="home_app_launch_guard_enable">Enable</string>
+    <string name="enable_app_blackout_confirmation_message_template">Had enough of ^1 for today? Enabling Blackout Mode means you\'ll need to pay a fee to use it again for the rest of the day.</string>
+    <string name="enable_app_blackout_confirmation_positive_button">Yes, blackout app</string>
+    <string name="home_tab_item_app_blackout_enabled">Blacked out for rest of the day</string>
+    <string name="home_tab_empty_state_message">Tap on the button below to get started with your first guard!</string>
 </resources>

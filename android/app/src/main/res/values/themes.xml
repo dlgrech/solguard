@@ -2,9 +2,11 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
     <style name="Base.Theme.SolGuard" parent="Theme.Material3.DayNight.NoActionBar">
-        <item name="android:fontFamily">@font/saira_semicondensed_400</item>
+        <item name="android:fontFamily">@font/source_sans_pro_400</item>
         <item name="android:statusBarColor">?android:colorBackground</item>
         <item name="android:navigationBarColor">?android:colorBackground</item>
+
+        <item name="bottomSheetDialogTheme">@style/ThemeOverlay.App.BottomSheetDialog</item>
     </style>
 
     <style name="Theme.SolGuard" parent="Base.Theme.SolGuard">
@@ -47,6 +49,19 @@
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowIsFloating">true</item>
         <item name="android:backgroundDimEnabled">false</item>
-        <item name="android:windowAnimationStyle">@null</item>
+        <item name="android:windowAnimationStyle">@style/FadeInWindowAnimationStyle</item>
+    </style>
+
+    <style name="FadeInWindowAnimationStyle">
+        <item name="android:windowEnterAnimation">@anim/fade_in</item>
+        <item name="android:windowExitAnimation">@anim/fade_out</item>
+    </style>
+
+    <style name="ThemeOverlay.App.BottomSheetDialog" parent="ThemeOverlay.Material3.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/SolguardBottomSheetTheme</item>
+    </style>
+
+    <style name="SolguardBottomSheetTheme" parent="Widget.Material3.BottomSheet.Modal">
+        <item name="backgroundTint">@color/section_color</item>
     </style>
 </resources>

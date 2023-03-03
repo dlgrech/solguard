@@ -1,0 +1,26 @@
+import kotlin.Boolean;
+
+CREATE TABLE AppLaunchGuardRecord (
+ packageName TEXT UNIQUE NOT NULL,
+ numberOfLaunchesPerDay INTEGER NOT NULL,
+ tokenAddress TEXT NOT NULL,
+ amount INTEGER NOT NULL,
+ enabled INTEGER AS Boolean NOT NULL
+);
+
+selectAll:
+SELECT *
+FROM AppLaunchGuardRecord;
+
+insert:
+INSERT OR REPLACE INTO AppLaunchGuardRecord
+VALUES ?;
+
+remove:
+DELETE FROM AppLaunchGuardRecord
+WHERE packageName = :packageName;
+
+getByPackageName:
+SELECT *
+FROM AppLaunchGuardRecord
+WHERE packageName = :packageName;

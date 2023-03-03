@@ -1,6 +1,7 @@
 plugins {
     id "com.android.application"
     id "org.jetbrains.kotlin.android"
+    id "app.cash.sqldelight" version libs.versions.sqldelight
 }
 
 android {
@@ -33,21 +34,37 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
         freeCompilerArgs += [
-                "-Xopt-in=kotlinx.coroutines.ExperimentalCoroutinesApi",
-                "-Xopt-in=kotlinx.coroutines.ObsoleteCoroutinesApi"
+                "-opt-in=kotlinx.coroutines.ExperimentalCoroutinesApi",
+                "-opt-in=kotlinx.coroutines.ObsoleteCoroutinesApi"
         ]
+    }
+}
+
+sqldelight {
+    databases {
+        SolGuardDatabase {
+        }
     }
 }
 
 dependencies {
     implementation libs.appcompat
+    implementation libs.androidx.biometrics
     implementation libs.androidx.fragment.ktx
     implementation libs.androidx.lifecycle.process
+    implementation libs.androidx.palette
     implementation libs.koin.android
     implementation libs.google.material
     implementation libs.shimmer.android
     implementation libs.lottie
     implementation libs.coil
+    implementation libs.cascade
+    implementation libs.ksol.core
+    implementation libs.ksol.rpc
+    implementation libs.solana.mwa.clientlib.ktx
+    implementation libs.sqldelight
+    implementation libs.sqldelight.adapters
+    implementation libs.sqldelight.coroutines
 
     testImplementation libs.android.junit
 }

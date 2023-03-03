@@ -1,0 +1,34 @@
+import kotlin.Boolean;
+
+CREATE TABLE AppBlackoutRecord (
+ packageName TEXT NOT NULL,
+ epochDay INTEGER NOT NULL,
+ amount INTEGER NOT NULL,
+ paymentToken TEXT NOT NULL,
+ enabled INTEGER AS Boolean NOT NULL,
+ UNIQUE (packageName, epochDay)
+);
+
+selectAll:
+SELECT *
+FROM AppBlackoutRecord
+ORDER BY epochDay DESC;
+
+getByEpochDay:
+SELECT *
+FROM AppBlackoutRecord
+WHERE epochDay = :epochDay;
+
+getByPackageAndEpochDay:
+SELECT *
+FROM AppBlackoutRecord
+WHERE epochDay = :epochDay AND packageName = :packageName;
+
+disableForPackageAndEpochDay:
+UPDATE AppBlackoutRecord
+SET enabled = 0
+WHERE epochDay = :epochDay AND packageName = :packageName;
+
+insert:
+INSERT OR REPLACE INTO AppBlackoutRecord
+VALUES ?;

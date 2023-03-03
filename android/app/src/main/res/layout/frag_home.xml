@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar_layout"
+        style="@style/SolGuardAppBarLayout">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/collapsing_toolbar_layout"
+            style="@style/SolGuardCollapsingToolbarLayout">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/toolbar"
+                style="@style/SolGuardToolbar.Collapsable"
+                app:title="@string/main_tab_screen_title_home"
+                app:titleCentered="true">
+
+                <ImageView
+                    android:id="@+id/overflow"
+                    style="@style/SolGuardToolbarItem"
+                    android:layout_gravity="end|center_vertical"
+                    android:src="@drawable/ic_baseline_more_vert_24" />
+
+                <ImageView
+                    android:id="@+id/blackout_mode"
+                    style="@style/SolGuardToolbarItem"
+                    android:layout_gravity="end|center_vertical"
+                    android:src="@drawable/ic_baseline_shield_outline_24" />
+
+            </com.google.android.material.appbar.MaterialToolbar>
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <com.dgsd.solguard.common.view.FadingEdgeRecyclerView
+        android:id="@+id/recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:paddingBottom="@dimen/padding_xlarge"
+        android:requiresFadingEdge="vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/create_new"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/padding_large"
+        android:backgroundTint="?colorPrimary"
+        android:text="@string/home_tab_create_new_entrypoint"
+        android:textAppearance="@style/TextAppearance.SolGuard.Label3"
+        android:textColor="?colorOnPrimary"
+        app:fontFamily="@font/source_sans_pro_600"
+        app:icon="@drawable/ic_baseline_add_24"
+        app:iconGravity="textStart"
+        app:iconPadding="@dimen/padding_xsmall"
+        app:iconTint="?colorOnPrimary" />
+
+    <TextView
+        android:id="@+id/empty_message"
+        style="@style/TextAppearance.SolGuard.Label2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:padding="@dimen/padding_xlarge"
+        android:text="@string/home_tab_empty_state_message"
+        android:textColor="?android:textColorSecondary"
+        android:visibility="gone" />
+
+    <ProgressBar
+        android:id="@+id/loading_indicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

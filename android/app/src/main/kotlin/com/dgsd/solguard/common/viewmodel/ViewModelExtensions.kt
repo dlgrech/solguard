@@ -1,7 +1,10 @@
 package com.dgsd.solguard.common.viewmodel
 
-import android.app.Application
+import android.content.Context
+import android.graphics.drawable.Drawable
+import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -18,5 +21,15 @@ fun AndroidViewModel.getString(
   @StringRes resId: Int,
   vararg args: Any
 ): String {
-  return getApplication<Application>().getString(resId, *args)
+  return getContext().getString(resId, *args)
+}
+
+fun AndroidViewModel.getDrawable(
+  @DrawableRes resId: Int
+): Drawable {
+  return checkNotNull(ContextCompat.getDrawable(getContext(), resId))
+}
+
+fun AndroidViewModel.getContext(): Context {
+  return ViewModelActivityHolder.getCurrentActivity() ?: getApplication()
 }

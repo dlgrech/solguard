@@ -1,0 +1,28 @@
+import kotlin.Boolean;
+
+CREATE TABLE BlackoutModeRecord (
+ epochDay INTEGER PRIMARY KEY NOT NULL,
+ amount INTEGER NOT NULL,
+ paymentToken TEXT NOT NULL,
+ enabled INTEGER AS Boolean NOT NULL
+);
+
+selectAll:
+SELECT *
+FROM BlackoutModeRecord
+ORDER BY epochDay DESC;
+
+getByEpochDay:
+SELECT *
+FROM BlackoutModeRecord
+WHERE epochDay = :epochDay
+ORDER BY epochDay DESC;
+
+disableForEpochDay:
+UPDATE BlackoutModeRecord
+SET enabled = 0
+WHERE epochDay = :epochDay;
+
+insert:
+INSERT OR REPLACE INTO BlackoutModeRecord
+VALUES ?;

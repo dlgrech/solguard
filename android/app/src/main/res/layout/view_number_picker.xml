@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:parentTag="com.dgsd.solguard.common.view.NumberPickerView">
+
+    <com.dgsd.solguard.common.view.FadingEdgeRecyclerView
+        android:id="@+id/recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/clickable_element_min_height"
+        android:clipToPadding="false"
+        android:requiresFadingEdge="horizontal"/>
+
+    <ImageView
+        android:id="@+id/left"
+        android:layout_width="@dimen/clickable_element_min_height"
+        android:layout_height="@dimen/clickable_element_min_height"
+        android:layout_gravity="start|center_vertical"
+        android:padding="@dimen/padding_small"
+        android:src="@drawable/ic_baseline_chevron_left_24"
+        app:tint="?android:textColorPrimary" />
+
+    <ImageView
+        android:id="@+id/right"
+        android:layout_width="@dimen/clickable_element_min_height"
+        android:layout_height="@dimen/clickable_element_min_height"
+        android:layout_gravity="end|center_vertical"
+        android:padding="@dimen/padding_small"
+        android:src="@drawable/ic_baseline_chevron_right_24"
+        app:tint="?android:textColorPrimary" />
+
+    <View
+        android:id="@+id/selectionIndicator"
+        android:layout_width="@dimen/clickable_element_min_height"
+        android:layout_height="@dimen/clickable_element_min_height"
+        android:layout_gravity="center"
+        android:background="@drawable/number_picker_selected_indicator" />
+
+</merge>
