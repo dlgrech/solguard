@@ -1,5 +1,5 @@
 <p align="center">
-  <img width="150px" height="150px" src="./android/ic_launcher-playstore.png">
+  <img width="150px" height="150px" src="./android/app/ic_launcher-playstore.png">
 </p>
 
 <h1 align="center">SolGuard</h1>
