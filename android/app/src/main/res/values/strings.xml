@@ -61,7 +61,7 @@
     <string name="app_block_screen_pay_button">Donate to unlock</string>
     <string name="app_block_unlock_memo_template">Unlock SolGuard by donating to ^1</string>
     <string name="app_block_unlock_success_message_template">Thank you for donating to ^1!\n\nYou\'re free to use ^2 as much as you want in the next ^3 minutes</string>
-    <string name="app_block_disable_blackout_mode_success_message">Blackout mode has been disabled</string>
+    <string name="app_block_disable_blackout_mode_success_message_template">Thank you for donating to ^1!\n\nBlackout mode has been disabled</string>
     <string name="app_block_success_title">Good to go</string>
     <string name="app_block_success_done_button">Done</string>
     <string name="home_tab_item_enable_accessibility_service_message">We need permission in order to work properly. Click here to enable!</string>

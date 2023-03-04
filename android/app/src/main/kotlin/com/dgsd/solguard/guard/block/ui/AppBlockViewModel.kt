@@ -269,12 +269,18 @@ class AppBlockViewModel(
           appBlackoutModeEvent.packageName
         )
         _showSuccess.tryEmit(
-          getString(R.string.app_block_disable_blackout_mode_success_message) to transactionSignature
+          TextUtils.expandTemplate(
+            getString(R.string.app_block_disable_blackout_mode_success_message_template),
+            charityToDonate.name.bold()
+          ) to transactionSignature
         )
       } else if (blackoutModeEvent != null) {
         appLaunchRepository.disableBlackoutMode()
         _showSuccess.tryEmit(
-          getString(R.string.app_block_disable_blackout_mode_success_message) to transactionSignature
+          TextUtils.expandTemplate(
+            getString(R.string.app_block_disable_blackout_mode_success_message_template),
+            charityToDonate.name.bold()
+          ) to transactionSignature
         )
       } else {
         val unlockTime = clock.now()
