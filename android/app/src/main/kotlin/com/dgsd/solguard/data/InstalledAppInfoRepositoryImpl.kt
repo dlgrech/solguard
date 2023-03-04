@@ -5,20 +5,22 @@ import android.content.pm.ApplicationInfo
 import android.content.pm.LauncherApps
 import android.os.Process
 import androidx.palette.graphics.Palette
+import com.dgsd.solguard.common.cache.CacheStrategy
+import com.dgsd.solguard.common.flow.executeWithCache
 import com.dgsd.solguard.common.flow.resourceFlowOf
 import com.dgsd.solguard.common.resource.model.Resource
 import com.dgsd.solguard.common.ui.toBitmap
+import com.dgsd.solguard.data.cache.InstalledAppsCache
 import com.dgsd.solguard.model.InstalledAppInfo
 import kotlinx.coroutines.flow.Flow
 
 class InstalledAppInfoRepositoryImpl(
   private val context: Context,
+  private val installedAppsCache: InstalledAppsCache,
 ) : InstalledAppInfoRepository {
 
   private val packageManager = context.packageManager
   private val launcherApps = context.getSystemService(Context.LAUNCHER_APPS_SERVICE) as LauncherApps
-
-  private var installedAppsCache: List<InstalledAppInfo>? = null
 
   override fun getInstalledApp(packageName: String): Flow<Resource<InstalledAppInfo>> {
     return resourceFlowOf { getAppInfo(packageName) }
@@ -29,17 +31,23 @@ class InstalledAppInfoRepositoryImpl(
   }
 
   override fun getInstalledApps(): Flow<Resource<List<InstalledAppInfo>>> {
-    return resourceFlowOf(cachedValue = installedAppsCache) {
-      launcherApps.getActivityList(null, Process.myUserHandle())
-        .asSequence()
-        .map { it.applicationInfo }
-        .filterNot { it.packageName == context.packageName }
-        .distinctBy { it.packageName }
-        .map { it.toAppInfo() }
-        .sortedBy { it.displayName.trim().toString().lowercase() }
-        .toList()
-        .also { installedAppsCache = it }
-    }
+    return executeWithCache(
+      cacheKey = "installed_apps",
+      cacheStrategy = CacheStrategy.CACHE_AND_NETWORK,
+      cache = installedAppsCache,
+      networkFlowProvider = {
+        resourceFlowOf {
+          launcherApps.getActivityList(null, Process.myUserHandle())
+            .asSequence()
+            .map { it.applicationInfo }
+            .filterNot { it.packageName == context.packageName }
+            .distinctBy { it.packageName }
+            .map { it.toAppInfo() }
+            .sortedBy { it.displayName.trim().toString().lowercase() }
+            .toList()
+        }
+      }
+    )
   }
 
   override suspend fun isInstalled(packageName: String): Boolean {

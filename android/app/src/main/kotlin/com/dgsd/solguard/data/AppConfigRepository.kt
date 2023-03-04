@@ -7,4 +7,6 @@ import kotlinx.coroutines.flow.Flow
 interface AppConfigRepository {
 
   fun getAppConfig(): Flow<Resource<AppConfig>>
+
+  suspend fun initialize()
 }

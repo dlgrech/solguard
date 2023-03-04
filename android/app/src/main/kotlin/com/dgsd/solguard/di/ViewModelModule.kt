@@ -2,6 +2,7 @@ package com.dgsd.solguard.di
 
 import com.dgsd.solguard.AppCoordinator
 import com.dgsd.solguard.applock.BiometricChallengeViewModel
+import com.dgsd.solguard.charity.CharityInfoViewModel
 import com.dgsd.solguard.guard.blackout.EnableBlackoutModeViewModel
 import com.dgsd.solguard.guard.block.ui.AppBlockViewModel
 import com.dgsd.solguard.guard.create.AppSelectionViewModel
@@ -33,6 +34,15 @@ object ViewModelModule {
           application = get(),
           appSettingsRepository = get(),
           tokenAmount = tokenAmount,
+        )
+      }
+
+      viewModel { (charityId: String) ->
+        CharityInfoViewModel(
+          application = get(),
+          charityId = charityId,
+          appConfigRepository = get(),
+          errorMessageFactory = get(),
         )
       }
 

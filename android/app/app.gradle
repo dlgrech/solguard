@@ -1,6 +1,7 @@
 plugins {
     id "com.android.application"
     id "org.jetbrains.kotlin.android"
+    id "org.jetbrains.kotlin.plugin.serialization"  version libs.versions.kotlin
     id "app.cash.sqldelight" version libs.versions.sqldelight
 }
 
@@ -34,8 +35,10 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
         freeCompilerArgs += [
+                "-opt-in=kotlinx.coroutines.DelicateCoroutinesApi",
                 "-opt-in=kotlinx.coroutines.ExperimentalCoroutinesApi",
-                "-opt-in=kotlinx.coroutines.ObsoleteCoroutinesApi"
+                "-opt-in=kotlinx.coroutines.ObsoleteCoroutinesApi",
+                "-opt-in=kotlinx.serialization.ExperimentalSerializationApi",
         ]
     }
 }
@@ -56,11 +59,14 @@ dependencies {
     implementation libs.koin.android
     implementation libs.google.material
     implementation libs.shimmer.android
+    implementation libs.kotlinx.json
     implementation libs.lottie
     implementation libs.coil
     implementation libs.cascade
     implementation libs.ksol.core
     implementation libs.ksol.rpc
+    implementation libs.retrofit
+    implementation libs.retrofit.kotlin.converter
     implementation libs.solana.mwa.clientlib.ktx
     implementation libs.sqldelight
     implementation libs.sqldelight.adapters

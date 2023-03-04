@@ -8,6 +8,11 @@ import androidx.annotation.Px
 import androidx.core.text.*
 import com.dgsd.solguard.R
 
+fun CharSequence.italic(): CharSequence {
+  val original = this
+  return buildSpannedString { italic { append(original) } }
+}
+
 fun CharSequence.bold(): CharSequence {
   val original = this
   return buildSpannedString { bold { append(original) } }

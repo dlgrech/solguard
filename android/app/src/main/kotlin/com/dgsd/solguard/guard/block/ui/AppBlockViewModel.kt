@@ -19,6 +19,7 @@ import com.dgsd.solguard.common.flow.stateFlowOf
 import com.dgsd.solguard.common.resource.ResourceFlowConsumer
 import com.dgsd.solguard.common.ui.PaymentTokenFormatter
 import com.dgsd.solguard.common.ui.bold
+import com.dgsd.solguard.common.ui.italic
 import com.dgsd.solguard.common.viewmodel.getString
 import com.dgsd.solguard.data.AppConfigRepository
 import com.dgsd.solguard.data.AppLaunchRepository
@@ -91,6 +92,9 @@ class AppBlockViewModel(
   private val _showSuccessMessage = MutableEventFlow<CharSequence>()
   val showSuccess = _showSuccessMessage.asEventFlow()
 
+  private val _showCharityInfo = MutableEventFlow<Charity>()
+  val showCharityInfo = _showCharityInfo.asEventFlow()
+
   @Suppress("IfThenToElvis")
   private val amountToPay = combine(
     appLaunchGuardResourceConsumer.data,
@@ -125,38 +129,49 @@ class AppBlockViewModel(
     }
   }.stateIn(viewModelScope, SharingStarted.Eagerly, null)
 
+  private val charity = appConfigResourceConsumer.data
+    .filterNotNull()
+    .map { it.charities.random() }
+    .stateIn(viewModelScope, SharingStarted.Eagerly, null)
+
+  val charityLogoUrl = charity.filterNotNull().map { it.imageUrl }
+  val charityCardTitle =
+    combine(
+      charity.filterNotNull().map { it.name },
+      amountToPay.filterNotNull()
+    ) { charityName, amount ->
+      TextUtils.expandTemplate(
+        getString(R.string.app_block_screen_charity_card_title_template),
+        PaymentTokenFormatter.format(amount).bold(),
+        charityName.bold()
+      )
+    }
+  val charityCardMessage = charity.filterNotNull().map {
+    TextUtils.expandTemplate(
+      getString(R.string.app_block_screen_charity_card_message_template),
+      it.shortDescription.italic()
+    )
+  }
+
   val messageText = combine(
     installedAppResourceConsumer.data.filterNotNull(),
     historicalRecordResourceConsumer.data.filterNotNull(),
     appLaunchGuardResourceConsumer.data,
     blackoutModeEventResourceConsumer.data,
     blackoutAppEventResourceConsumer.data,
-    amountToPay.filterNotNull(),
-  ) { items ->
-    val installedAppInfo = items[0] as InstalledAppInfo
-    val todaysRecord = items[1] as AppLaunchEvent
-    val appLaunchGuard = items[2] as? AppLaunchGuard?
-    val blackoutModeEvent = items[3] as? BlackoutModeEvent?
-    val appBlackoutEvent = items[4] as? BlackoutAppEvent?
-    val amount = items[5] as TokenAmount
-
+  ) { installedAppInfo, todaysRecord, appLaunchGuard, blackoutModeEvent, appBlackoutEvent ->
     if (appBlackoutEvent != null) {
       TextUtils.expandTemplate(
         getString(R.string.app_block_screen_instruction_app_blackout_template),
         installedAppInfo.displayName.bold(),
-        PaymentTokenFormatter.format(amount).bold()
       )
     } else if (blackoutModeEvent != null) {
       if (isForBlackoutDisableOnly) {
-        TextUtils.expandTemplate(
-          getString(R.string.app_block_screen_instruction_blackout_only_template),
-          PaymentTokenFormatter.format(amount).bold()
-        )
+        getString(R.string.app_block_screen_instruction_blackout_only_template)
       } else {
         TextUtils.expandTemplate(
           getString(R.string.app_block_screen_instruction_blackout_template),
           installedAppInfo.displayName.bold(),
-          PaymentTokenFormatter.format(amount).bold()
         )
       }
     } else if (appLaunchGuard != null) {
@@ -165,8 +180,6 @@ class AppBlockViewModel(
         installedAppInfo.displayName.bold(),
         appLaunchGuard.numberOfLaunchesPerDay.toString().bold(),
         todaysRecord.launchCount.toString().bold(),
-        getString(R.string.app_block_screen_instruction_really).bold(),
-        PaymentTokenFormatter.format(amount).bold()
       )
     } else {
       null
@@ -221,6 +234,7 @@ class AppBlockViewModel(
       val amountToPay = checkNotNull(amountToPay.value)
       val todaysRecord = checkNotNull(historicalRecordResourceConsumer.data.value)
       val appConfig = checkNotNull(appConfigResourceConsumer.data.value)
+      val charityToDonate = checkNotNull(charity.value)
       val blackoutModeEvent = blackoutModeEventResourceConsumer.data.value
       val appBlackoutModeEvent = blackoutAppEventResourceConsumer.data.value
 
@@ -237,9 +251,10 @@ class AppBlockViewModel(
 
       val transaction = createTransactionToSign(
         sender = PublicKey.fromByteArray(authResult.publicKey),
-        receiver = appConfig.feeReceiver,
+        receiver = charityToDonate.publicKey,
         amountToPay = amountToPay,
-        blockhash = latestBlockhash
+        blockhash = latestBlockhash,
+        charityName = charityToDonate.name,
       )
 
       val signAndSendResult = mobileWalletAdapterOperations.signAndSendTransactions(
@@ -276,6 +291,7 @@ class AppBlockViewModel(
         _showSuccessMessage.tryEmit(
           TextUtils.expandTemplate(
             getString(R.string.app_block_unlock_success_message_template),
+            charityToDonate.name.bold(),
             installedAppResourceConsumer.data.value?.displayName ?: "",
             AppBlockUnlockConstants.MINUTES_TO_UNBLOCK_AFTER_UNLOCK.toString(),
           )
@@ -292,7 +308,8 @@ class AppBlockViewModel(
     sender: PublicKey,
     receiver: PublicKey,
     amountToPay: TokenAmount,
-    blockhash: String
+    blockhash: String,
+    charityName: String
   ): LocalTransaction {
     return LocalTransactions.createUnsignedTransferTransaction(
       sender,
@@ -300,10 +317,16 @@ class AppBlockViewModel(
       amountToPay.amount,
       TextUtils.expandTemplate(
         getString(R.string.app_block_unlock_memo_template),
-        installedAppResourceConsumer.data.value?.displayName
-          ?: getString(R.string.app_block_unlock_default_app)
+        charityName
       ).toString(),
       PublicKey.fromBase58(blockhash)
     )
+  }
+
+  fun onCharityCardClicked() {
+    val charityToDonate = charity.value
+    if (charityToDonate != null) {
+      _showCharityInfo.tryEmit(charityToDonate)
+    }
   }
 }

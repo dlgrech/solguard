@@ -10,11 +10,11 @@ import com.dgsd.solguard.common.flow.*
 import com.dgsd.solguard.common.resource.ResourceFlowConsumer
 import com.dgsd.solguard.common.viewmodel.getContext
 import com.dgsd.solguard.common.viewmodel.getString
+import com.dgsd.solguard.data.AppConfigRepository
 import com.dgsd.solguard.data.AppLaunchRepository
 import com.dgsd.solguard.data.InstalledAppInfoRepository
 import com.dgsd.solguard.guard.block.AppBlockAccessibilityService
 import com.dgsd.solguard.guard.block.manager.AppBlockManager
-import com.dgsd.solguard.guard.unlock.AppBlockUnlockConstants
 import com.dgsd.solguard.home.model.HomeItem
 import com.dgsd.solguard.model.AppLaunchEvent
 import com.dgsd.solguard.model.AppLaunchGuard
@@ -32,6 +32,7 @@ class HomeViewModel(
   private val appLaunchRepository: AppLaunchRepository,
   private val mwaAvailabilityManager: MobileWalletAdapterAvailabilityManager,
   private val appBlockManager: AppBlockManager,
+  private val appConfigRepository: AppConfigRepository,
 ) : AndroidViewModel(application) {
 
   private val _showEnableBlackoutMode = SimpleMutableEventFlow()

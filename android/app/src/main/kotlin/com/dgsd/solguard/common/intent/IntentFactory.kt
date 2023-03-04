@@ -20,7 +20,7 @@ class IntentFactory(private val context: Context) {
   }
 
   fun createAccessibilitySettingsIntent(): Intent {
-    return Intent(android.provider.Settings.ACTION_ACCESSIBILITY_SETTINGS)
+    return Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS)
       .addCategory(Intent.CATEGORY_DEFAULT)
   }
 

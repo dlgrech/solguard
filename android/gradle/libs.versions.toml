@@ -42,3 +42,7 @@ sqldelight-adapters = { module = "app.cash.sqldelight:primitive-adapters", versi
 sqldelight-coroutines = { module = "app.cash.sqldelight:coroutines-extensions", version.ref = "sqldelight" }
 
 cascade = "me.saket.cascade:cascade:2.0.0-rc02"
+
+retrofit = "com.squareup.retrofit2:retrofit:2.9.0"
+retrofit-kotlin-converter = "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0"
+kotlinx-json = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.0"

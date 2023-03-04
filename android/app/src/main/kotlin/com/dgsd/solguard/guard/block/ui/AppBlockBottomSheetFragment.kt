@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.DecelerateInterpolator
 import android.view.animation.LinearInterpolator
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
@@ -16,8 +17,10 @@ import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.fragment.app.setFragmentResult
 import androidx.lifecycle.lifecycleScope
+import coil.load
 import com.airbnb.lottie.LottieAnimationView
 import com.dgsd.solguard.R
+import com.dgsd.solguard.charity.CharityInfoBottomSheet
 import com.dgsd.solguard.common.bottomsheet.BaseBottomSheetFragment
 import com.dgsd.solguard.common.flow.onEach
 import com.dgsd.solguard.common.ui.getColorAttr
@@ -104,6 +107,10 @@ class AppBlockBottomSheetFragment : BaseBottomSheetFragment() {
     val closeButton = view.requireViewById<View>(R.id.close_button)
     val payButton = view.requireViewById<View>(R.id.pay_button)
     val doneButton = view.requireViewById<View>(R.id.done_button)
+    val charityCard = view.requireViewById<View>(R.id.charity_card)
+    val charityCardLogo = view.requireViewById<ImageView>(R.id.charity_logo)
+    val charityCardTitle = view.requireViewById<TextView>(R.id.charity_card_title)
+    val charityCardMessage = view.requireViewById<TextView>(R.id.charity_card_message)
 
     closeButton.setOnClickListener {
       dismissAllowingStateLoss()
@@ -111,6 +118,10 @@ class AppBlockBottomSheetFragment : BaseBottomSheetFragment() {
 
     doneButton.setOnClickListener {
       dismissAllowingStateLoss()
+    }
+
+    charityCard.setOnClickListener {
+      viewModel.onCharityCardClicked()
     }
 
     payButton.setOnClickListener {
@@ -141,6 +152,22 @@ class AppBlockBottomSheetFragment : BaseBottomSheetFragment() {
 
     onEach(viewModel.showErrorMessage) {
       showError(it)
+    }
+
+    onEach(viewModel.charityLogoUrl) {
+      charityCardLogo.load(it) { crossfade(true) }
+    }
+
+    onEach(viewModel.charityCardTitle) {
+      charityCardTitle.text = it
+    }
+
+    onEach(viewModel.charityCardMessage) {
+      charityCardMessage.text = it
+    }
+
+    onEach(viewModel.showCharityInfo) {
+      CharityInfoBottomSheet.newInstance(it.id).show(childFragmentManager, null)
     }
 
     onEach(viewModel.showSuccess) {

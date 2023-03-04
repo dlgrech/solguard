@@ -16,20 +16,25 @@ import com.dgsd.solguard.common.error.ErrorMessageFactory
 import com.dgsd.solguard.common.intent.IntentFactory
 import com.dgsd.solguard.common.permission.PermissionsManager
 import com.dgsd.solguard.data.*
-import com.dgsd.solguard.data.AppLaunchRepositoryImpl
+import com.dgsd.solguard.data.cache.AppConfigCache
+import com.dgsd.solguard.data.cache.InstalledAppsCache
 import com.dgsd.solguard.guard.block.manager.AppBlockManager
 import com.dgsd.solguard.guard.block.manager.AppBlockManagerImpl
 import com.dgsd.solguard.guard.block.manager.AppBlockStrategyFactory
 import com.dgsd.solguard.guard.notifications.AppBlockNotificationManager
 import com.dgsd.solguard.mwa.MobileWalletAdapterAvailabilityManager
 import com.dgsd.solguard.mwa.MobileWalletAdapterAvailabilityManagerImpl
+import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import com.solana.mobilewalletadapter.clientlib.MobileWalletAdapter
 import kotlinx.coroutines.Dispatchers
+import kotlinx.serialization.json.Json
 import okhttp3.Cache
+import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import org.koin.core.module.Module
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
+import retrofit2.Retrofit
 import java.util.concurrent.TimeUnit
 
 object AppModule {
@@ -45,6 +50,25 @@ object AppModule {
           .readTimeout(60, TimeUnit.SECONDS)
           .cache(Cache(context.cacheDir, 10 * 1024 * 1024))
           .build()
+      }
+
+      single<Json> {
+        Json {
+          ignoreUnknownKeys = true
+          isLenient = true
+        }
+      }
+
+      single<Retrofit> {
+        Retrofit.Builder()
+          .baseUrl("https://solguard-server.vercel.app/")
+          .client(get())
+          .addConverterFactory(get<Json>().asConverterFactory("application/json".toMediaType()))
+          .build()
+      }
+
+      single<SolGuardApi> {
+        get<Retrofit>().create(SolGuardApi::class.java)
       }
 
       single<ImageLoader> {
@@ -77,7 +101,10 @@ object AppModule {
       }
 
       single<InstalledAppInfoRepository> {
-        InstalledAppInfoRepositoryImpl(context = get())
+        InstalledAppInfoRepositoryImpl(
+          context = get(),
+          installedAppsCache = get(),
+        )
       }
 
       single<SuggestedAppsRepository> {
@@ -85,7 +112,10 @@ object AppModule {
       }
 
       single<AppConfigRepository> {
-        AppConfigRepositoryImpl()
+        AppConfigRepositoryImpl(
+          solGuardApi = get(),
+          appConfigCache = get()
+        )
       }
 
       single<AppSettingsRepository> {
@@ -121,6 +151,8 @@ object AppModule {
         AppLockBiometricManagerImpl(get())
       }
 
+      singleOf(::AppConfigCache)
+      singleOf(::InstalledAppsCache)
       singleOf(::AppBlockNotificationManager)
       singleOf(::ErrorMessageFactory)
       singleOf(::AppBlockStrategyFactory)
