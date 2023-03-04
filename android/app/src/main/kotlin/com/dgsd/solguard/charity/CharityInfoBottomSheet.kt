@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.os.bundleOf
+import androidx.core.view.isVisible
 import coil.load
 import com.dgsd.solguard.R
 import com.dgsd.solguard.common.bottomsheet.BaseBottomSheetFragment
@@ -43,9 +44,10 @@ class CharityInfoBottomSheet : BaseBottomSheetFragment() {
     val description = view.requireViewById<TextView>(R.id.description)
     val logo = view.requireViewById<ImageView>(R.id.logo)
     val learnMore = view.requireViewById<View>(R.id.learn_more)
+    val loadingIndicator = view.requireViewById<View>(R.id.loading_indicator)
 
     onEach(viewModel.isLoading) {
-
+      loadingIndicator.isVisible = it
     }
 
     onEach(viewModel.charity) { charity ->
