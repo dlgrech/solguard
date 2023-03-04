@@ -41,7 +41,7 @@
             android:paddingBottom="@dimen/padding_default"
             android:requiresFadingEdge="vertical">
 
-        <LinearLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:clipChildren="false"
@@ -174,42 +174,45 @@
 
                 <View style="@style/AppSettingsDivider" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/settings_row_show_suggestions_notification"
-                style="@style/AppSettingsRow"
-                android:background="@color/section_color">
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/settings_row_show_suggestions_notification"
+                    style="@style/AppSettingsRow"
+                    android:background="@color/section_color">
 
-                <TextView
-                    android:id="@+id/settings_value_show_suggestions_notification"
-                    style="@style/AppSettingsRowValue"
-                    app:layout_constraintStart_toEndOf="@id/settings_title_show_suggestions_notification" />
+                    <TextView
+                        android:id="@+id/settings_value_show_suggestions_notification"
+                        style="@style/AppSettingsRowValue"
+                        app:layout_constraintStart_toEndOf="@id/settings_title_show_suggestions_notification" />
 
-                <TextView
-                    android:id="@+id/settings_title_show_suggestions_notification"
-                    style="@style/AppSettingsRowTitle"
-                    android:text="@string/settings_title_show_suggestions_notification"
-                    app:layout_constraintBottom_toTopOf="@id/settings_description_show_suggestions_notification"
-                    app:layout_constraintEnd_toStartOf="@id/settings_value_show_suggestions_notification"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    <TextView
+                        android:id="@+id/settings_title_show_suggestions_notification"
+                        style="@style/AppSettingsRowTitle"
+                        android:text="@string/settings_title_show_suggestions_notification"
+                        app:layout_constraintBottom_toTopOf="@id/settings_description_show_suggestions_notification"
+                        app:layout_constraintEnd_toStartOf="@id/settings_value_show_suggestions_notification"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
-                    android:id="@+id/settings_description_show_suggestions_notification"
-                    style="@style/AppSettingsRowDescription"
-                    android:text="@string/settings_description_show_suggestions_notification"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/settings_value_show_suggestions_notification"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/settings_title_show_suggestions_notification" />
+                    <TextView
+                        android:id="@+id/settings_description_show_suggestions_notification"
+                        style="@style/AppSettingsRowDescription"
+                        android:text="@string/settings_description_show_suggestions_notification"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/settings_value_show_suggestions_notification"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/settings_title_show_suggestions_notification" />
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <View style="@style/AppSettingsDivider" />
+                <View
+                    style="@style/AppSettingsDivider"
+                    android:visibility="gone" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/settings_row_donation_to_solguard"
                     style="@style/AppSettingsRow"
-                    android:background="@drawable/rounded_rect_bottom_only_section_color">
+                    android:background="@drawable/rounded_rect_bottom_only_section_color"
+                    android:visibility="gone">
 
                     <TextView
                         android:id="@+id/settings_value_donation_to_solguard"
