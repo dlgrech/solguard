@@ -175,4 +175,5 @@
     <string name="app_block_screen_charity_card_title_template">Donating ^1 to ^2</string>
     <string name="app_block_screen_charity_card_message_template">Cause: ^1</string>
     <string name="charity_info_learn_more">Learn More</string>
+    <string name="app_block_success_view_transaction">View transaction</string>
 </resources>

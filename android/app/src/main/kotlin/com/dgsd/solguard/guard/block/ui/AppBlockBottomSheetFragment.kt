@@ -23,10 +23,12 @@ import com.dgsd.solguard.R
 import com.dgsd.solguard.charity.CharityInfoBottomSheet
 import com.dgsd.solguard.common.bottomsheet.BaseBottomSheetFragment
 import com.dgsd.solguard.common.flow.onEach
+import com.dgsd.solguard.common.intent.IntentFactory
 import com.dgsd.solguard.common.ui.getColorAttr
 import com.google.android.material.snackbar.Snackbar
 import com.solana.mobilewalletadapter.clientlib.ActivityResultSender
 import com.solana.mobilewalletadapter.clientlib.MobileWalletAdapter
+import com.solana.mobilewalletadapter.clientlib.RpcCluster
 import com.solana.mobilewalletadapter.clientlib.TransactionResult
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -37,6 +39,8 @@ private const val ARG_BLACKOUT_DISABLE_ONLY = "blacklist_disable_only"
 private const val ARG_IS_FOR_IN_APP = "is_for_in_app"
 
 class AppBlockBottomSheetFragment : BaseBottomSheetFragment() {
+
+  private val intentFactory by inject<IntentFactory>()
 
   private val mobileWalletAdapter by inject<MobileWalletAdapter>()
 
@@ -103,6 +107,7 @@ class AppBlockBottomSheetFragment : BaseBottomSheetFragment() {
     val successAnimation = view.requireViewById<LottieAnimationView>(R.id.success_animation)
     val successText = view.requireViewById<TextView>(R.id.success_message)
     val screenTitle = view.requireViewById<TextView>(R.id.title)
+    val viewTransaction = view.requireViewById<View>(R.id.view_transaction)
     val message = view.requireViewById<TextView>(R.id.message)
     val closeButton = view.requireViewById<View>(R.id.close_button)
     val payButton = view.requireViewById<View>(R.id.pay_button)
@@ -170,11 +175,17 @@ class AppBlockBottomSheetFragment : BaseBottomSheetFragment() {
       CharityInfoBottomSheet.newInstance(it.id).show(childFragmentManager, null)
     }
 
-    onEach(viewModel.showSuccess) {
-      successText.text = it
+    onEach(viewModel.showSuccess) { (message, transactionSignature) ->
+      successText.text = message
       successContent.isVisible = true
       blockContent.isInvisible = true
       successAnimation.playAnimation()
+
+      viewTransaction.setOnClickListener {
+        startActivity(
+          intentFactory.createViewTransactionIntent(transactionSignature, RpcCluster.Devnet.name)
+        )
+      }
 
       if (viewModel.isBackgroundAnimationEnabled.value) {
         successColorAnimator.start()

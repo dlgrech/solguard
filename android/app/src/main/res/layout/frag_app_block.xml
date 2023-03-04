@@ -150,10 +150,12 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:id="@+id/success"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
         android:visibility="gone">
 
         <com.airbnb.lottie.LottieAnimationView
@@ -162,9 +164,6 @@
             android:layout_height="120dp"
             android:layout_marginTop="@dimen/padding_large"
             android:scaleType="centerCrop"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             app:lottie_autoPlay="false"
             app:lottie_rawRes="@raw/success" />
 
@@ -175,10 +174,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/padding_large"
             android:gravity="center"
-            android:text="@string/app_block_success_title"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/success_animation" />
+            android:text="@string/app_block_success_title"/>
 
         <TextView
             android:id="@+id/success_message"
@@ -186,25 +182,29 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/padding_large"
-            android:gravity="center"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/success_title" />
+            android:gravity="center"/>
 
         <Button
             android:id="@+id/done_button"
             style="@style/PrimaryButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/padding_xxlarge"
-            android:layout_marginBottom="@dimen/padding_large"
-            android:text="@string/common_done"
-            app:layout_constrainedWidth="true"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/success_message" />
+            android:layout_marginTop="@dimen/padding_large"
+            android:text="@string/common_done" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/view_transaction"
+            style="@style/TextAppearance.Link"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="@dimen/padding_large"
+            android:gravity="center"
+            android:drawablePadding="@dimen/padding_small"
+            android:text="@string/app_block_success_view_transaction"
+            app:drawableTint="?colorPrimary"
+            app:drawableEndCompat="@drawable/ic_baseline_open_in_new_24" />
+
+    </LinearLayout>
 
 </FrameLayout>

@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.provider.Settings
+import com.dgsd.ksol.core.model.Cluster
 
 class IntentFactory(private val context: Context) {
 
@@ -28,5 +29,14 @@ class IntentFactory(private val context: Context) {
     return Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS)
       .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
       .putExtra(Settings.EXTRA_APP_PACKAGE, context.packageName)
+  }
+
+  fun createViewTransactionIntent(
+    transactionSignature: String,
+    cluster: String,
+  ): Intent {
+    return createUrlIntent(
+      "https://explorer.solana.com/tx/$transactionSignature?cluster=$cluster"
+    )
   }
 }

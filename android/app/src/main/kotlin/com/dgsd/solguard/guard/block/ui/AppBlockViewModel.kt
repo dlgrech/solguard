@@ -8,7 +8,7 @@ import com.dgsd.ksol.SolanaApi
 import com.dgsd.ksol.core.LocalTransactions
 import com.dgsd.ksol.core.model.LocalTransaction
 import com.dgsd.ksol.core.model.PublicKey
-import com.dgsd.ksol.core.utils.EncodingUtils
+import com.dgsd.ksol.core.model.TransactionSignature
 import com.dgsd.solguard.R
 import com.dgsd.solguard.common.amount.toLamportsOrNull
 import com.dgsd.solguard.common.clock.Clock
@@ -89,8 +89,8 @@ class AppBlockViewModel(
   private val _showErrorMessage = MutableEventFlow<CharSequence>()
   val showErrorMessage = _showErrorMessage.asEventFlow()
 
-  private val _showSuccessMessage = MutableEventFlow<CharSequence>()
-  val showSuccess = _showSuccessMessage.asEventFlow()
+  private val _showSuccess = MutableEventFlow<Pair<CharSequence, TransactionSignature>>()
+  val showSuccess = _showSuccess.asEventFlow()
 
   private val _showCharityInfo = MutableEventFlow<Charity>()
   val showCharityInfo = _showCharityInfo.asEventFlow()
@@ -261,18 +261,20 @@ class AppBlockViewModel(
         arrayOf(LocalTransactions.serialize(transaction))
       )
 
+      val transactionSignature = signAndSendResult.signatures[0].decodeToString()
+
       if (appBlackoutModeEvent != null) {
         appLaunchRepository.disableAppBlackout(
           clock.now().toLocalDate(),
           appBlackoutModeEvent.packageName
         )
-        _showSuccessMessage.tryEmit(
-          getString(R.string.app_block_disable_blackout_mode_success_message)
+        _showSuccess.tryEmit(
+          getString(R.string.app_block_disable_blackout_mode_success_message) to transactionSignature
         )
       } else if (blackoutModeEvent != null) {
         appLaunchRepository.disableBlackoutMode()
-        _showSuccessMessage.tryEmit(
-          getString(R.string.app_block_disable_blackout_mode_success_message)
+        _showSuccess.tryEmit(
+          getString(R.string.app_block_disable_blackout_mode_success_message) to transactionSignature
         )
       } else {
         val unlockTime = clock.now()
@@ -280,7 +282,7 @@ class AppBlockViewModel(
           UnlockAppEvent(
             packageName = packageName,
             timestamp = unlockTime,
-            transactionSignature = EncodingUtils.encodeBase58(signAndSendResult.signatures[0]),
+            transactionSignature = transactionSignature,
             amount = amountToPay,
             launchNumber = todaysRecord.launchCount.toInt() + 1
           )
@@ -288,13 +290,13 @@ class AppBlockViewModel(
 
         appBlockNotificationManager.showAppUnlockedNotification(packageName, unlockTime)
 
-        _showSuccessMessage.tryEmit(
+        _showSuccess.tryEmit(
           TextUtils.expandTemplate(
             getString(R.string.app_block_unlock_success_message_template),
             charityToDonate.name.bold(),
             installedAppResourceConsumer.data.value?.displayName ?: "",
             AppBlockUnlockConstants.MINUTES_TO_UNBLOCK_AFTER_UNLOCK.toString(),
-          )
+          ) to transactionSignature
         )
       }
     } catch (ex: Exception) {
