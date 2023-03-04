@@ -176,4 +176,12 @@
     <string name="app_block_screen_charity_card_message_template">Cause: ^1</string>
     <string name="charity_info_learn_more">Learn More</string>
     <string name="app_block_success_view_transaction">View transaction</string>
+    <string name="how_it_works_title_solgard">Welcome!</string>
+    <string name="how_it_works_message_solgard">Your phone is designed to keep your attention.\n\nFeel it\'s doing too good of a job?\n\nWe\'re here to help you put down your device and break the addictive cycle!</string>
+    <string name="how_it_works_message_select_app">Choose which apps you want to use less. You set your own limit and the amount you\'ll need to donate if you don\'t stick to it</string>
+    <string name="how_it_works_title_select_app">Set your limits</string>
+    <string name="how_it_works_title_limit_yourself">Develop good habits</string>
+    <string name="how_it_works_message_limit_yourself">Want to go past your limit for the day? You can do that, but it\'s going to cost you. Use your favourite Solana Wallet to pay a donation and your app will unlock.</string>
+    <string name="how_it_works_message_feel_good">If you stick to your goals, great! You\'re on your way into breaking your addictive habits and using your phone less.\n\nIf you\'re having troubles, you can feel good knowing that your fees are distributed to a range of vetted charities.</string>
+    <string name="how_it_works_title_feel_good">Feel good!</string>
 </resources>
