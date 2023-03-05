@@ -9,13 +9,15 @@
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/icon_shimmer"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        />
+        app:lottie_autoPlay="true"
+        app:lottie_speed="0.8"
+        app:lottie_rawRes="@raw/donate" />
 
     <TextView
         android:id="@+id/title"
