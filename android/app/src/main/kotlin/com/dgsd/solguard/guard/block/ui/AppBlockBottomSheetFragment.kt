@@ -175,7 +175,7 @@ class AppBlockBottomSheetFragment : BaseBottomSheetFragment() {
       CharityInfoBottomSheet.newInstance(it.id).show(childFragmentManager, null)
     }
 
-    onEach(viewModel.showSuccess) { (message, transactionSignature) ->
+    onEach(viewModel.showSuccess) { (message, transactionSignature, rpcCluster) ->
       successText.text = message
       successContent.isVisible = true
       blockContent.isInvisible = true
@@ -183,7 +183,7 @@ class AppBlockBottomSheetFragment : BaseBottomSheetFragment() {
 
       viewTransaction.setOnClickListener {
         startActivity(
-          intentFactory.createViewTransactionIntent(transactionSignature, RpcCluster.Devnet.name)
+          intentFactory.createViewTransactionIntent(transactionSignature, rpcCluster.name)
         )
       }
 

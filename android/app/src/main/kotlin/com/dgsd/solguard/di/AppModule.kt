@@ -147,8 +147,8 @@ object AppModule {
         MobileWalletAdapter()
       }
 
-      single<SolanaApi> {
-        SolanaApi(Cluster.DEVNET)
+      factory<SolanaApi> {
+        SolanaApi(get<AppSettingsRepository>().getAppSettingsSync().cluster)
       }
 
       single<AppLockBiometricManager> {

@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface AppSettingsRepository {
 
-  suspend fun getAppSettingsSync(): AppSettings
+  fun getAppSettingsSync(): AppSettings
 
   fun getAppSettings(): Flow<Resource<AppSettings>>
 

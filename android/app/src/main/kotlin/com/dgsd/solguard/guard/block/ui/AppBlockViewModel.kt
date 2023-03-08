@@ -6,6 +6,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.dgsd.ksol.SolanaApi
 import com.dgsd.ksol.core.LocalTransactions
+import com.dgsd.ksol.core.model.Cluster
 import com.dgsd.ksol.core.model.LocalTransaction
 import com.dgsd.ksol.core.model.PublicKey
 import com.dgsd.ksol.core.model.TransactionSignature
@@ -89,7 +90,7 @@ class AppBlockViewModel(
   private val _showErrorMessage = MutableEventFlow<CharSequence>()
   val showErrorMessage = _showErrorMessage.asEventFlow()
 
-  private val _showSuccess = MutableEventFlow<Pair<CharSequence, TransactionSignature>>()
+  private val _showSuccess = MutableEventFlow<Triple<CharSequence, TransactionSignature, RpcCluster>>()
   val showSuccess = _showSuccess.asEventFlow()
 
   private val _showCharityInfo = MutableEventFlow<Charity>()
@@ -234,6 +235,7 @@ class AppBlockViewModel(
       val amountToPay = checkNotNull(amountToPay.value)
       val todaysRecord = checkNotNull(historicalRecordResourceConsumer.data.value)
       val appConfig = checkNotNull(appConfigResourceConsumer.data.value)
+      val appSettings = checkNotNull(appSettingsResourceConsumer.data.value)
       val charityToDonate = checkNotNull(charity.value)
       val blackoutModeEvent = blackoutModeEventResourceConsumer.data.value
       val appBlackoutModeEvent = blackoutAppEventResourceConsumer.data.value
@@ -242,11 +244,18 @@ class AppBlockViewModel(
         requireNotNull(blackoutModeEvent ?: appBlackoutModeEvent)
       }
 
+      val rpcCluster = when (val cluster = appSettings.cluster) {
+        Cluster.DEVNET -> RpcCluster.Devnet
+        Cluster.TESTNET -> RpcCluster.Testnet
+        Cluster.MAINNET_BETA -> RpcCluster.MainnetBeta
+        else -> error("Unknown cluster: $cluster")
+      }
+
       val authResult = mobileWalletAdapterOperations.authorize(
         appConfig.identityUri,
         appConfig.identityIconUri,
         getString(R.string.app_name),
-        RpcCluster.Devnet
+        rpcCluster
       )
 
       val transaction = createTransactionToSign(
@@ -269,18 +278,26 @@ class AppBlockViewModel(
           appBlackoutModeEvent.packageName
         )
         _showSuccess.tryEmit(
-          TextUtils.expandTemplate(
-            getString(R.string.app_block_disable_blackout_mode_success_message_template),
-            charityToDonate.name.bold()
-          ) to transactionSignature
+          Triple(
+            TextUtils.expandTemplate(
+              getString(R.string.app_block_disable_blackout_mode_success_message_template),
+              charityToDonate.name.bold()
+            ),
+            transactionSignature,
+            rpcCluster,
+          )
         )
       } else if (blackoutModeEvent != null) {
         appLaunchRepository.disableBlackoutMode()
         _showSuccess.tryEmit(
-          TextUtils.expandTemplate(
-            getString(R.string.app_block_disable_blackout_mode_success_message_template),
-            charityToDonate.name.bold()
-          ) to transactionSignature
+          Triple(
+            TextUtils.expandTemplate(
+              getString(R.string.app_block_disable_blackout_mode_success_message_template),
+              charityToDonate.name.bold()
+            ),
+            transactionSignature,
+            rpcCluster
+          )
         )
       } else {
         val unlockTime = clock.now()
@@ -297,12 +314,16 @@ class AppBlockViewModel(
         appBlockNotificationManager.showAppUnlockedNotification(packageName, unlockTime)
 
         _showSuccess.tryEmit(
-          TextUtils.expandTemplate(
-            getString(R.string.app_block_unlock_success_message_template),
-            charityToDonate.name.bold(),
-            installedAppResourceConsumer.data.value?.displayName ?: "",
-            AppBlockUnlockConstants.MINUTES_TO_UNBLOCK_AFTER_UNLOCK.toString(),
-          ) to transactionSignature
+          Triple(
+            TextUtils.expandTemplate(
+              getString(R.string.app_block_unlock_success_message_template),
+              charityToDonate.name.bold(),
+              installedAppResourceConsumer.data.value?.displayName ?: "",
+              AppBlockUnlockConstants.MINUTES_TO_UNBLOCK_AFTER_UNLOCK.toString(),
+            ),
+            transactionSignature,
+            rpcCluster
+          )
         )
       }
     } catch (ex: Exception) {

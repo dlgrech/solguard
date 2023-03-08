@@ -31,7 +31,7 @@ class AppSettingsRepositoryImpl(
 
   private val appSettings by lazy { MutableStateFlow(createSettings()) }
 
-  override suspend fun getAppSettingsSync(): AppSettings {
+  override fun getAppSettingsSync(): AppSettings {
     return appSettings.value
   }
 
