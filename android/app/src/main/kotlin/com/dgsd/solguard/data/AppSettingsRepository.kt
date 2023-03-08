@@ -1,5 +1,6 @@
 package com.dgsd.solguard.data
 
+import com.dgsd.ksol.core.model.Cluster
 import com.dgsd.solguard.common.resource.model.Resource
 import com.dgsd.solguard.model.AppSettings
 import com.dgsd.solguard.model.PaymentToken
@@ -22,4 +23,6 @@ interface AppSettingsRepository {
   fun setShowSuggestedGuardNotifications(enabled: Boolean)
 
   fun setDonationToSolGuardPercentage(percentage: Float)
+
+  fun setCluster(cluster: Cluster)
 }

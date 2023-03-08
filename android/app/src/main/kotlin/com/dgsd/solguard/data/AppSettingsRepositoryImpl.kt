@@ -2,6 +2,7 @@ package com.dgsd.solguard.data
 
 import android.content.SharedPreferences
 import androidx.core.content.edit
+import com.dgsd.ksol.core.model.Cluster
 import com.dgsd.ksol.core.model.PublicKey
 import com.dgsd.solguard.common.flow.asResourceFlow
 import com.dgsd.solguard.common.resource.model.Resource
@@ -17,9 +18,15 @@ private const val PREF_KEY_SHOW_WARNING_ON_LAST_LAUNCH = "show_warning_on_last_l
 private const val PREF_KEY_SHOW_TIME_REMAINING_WHILE_UNLOCKED = "show_time_remaining_while_unlocked"
 private const val PREF_KEY_SHOW_SUGGESTED_GUARD_NOTIFICATIONS = "show_suggested_guard_notifications"
 private const val PREF_KEY_DONATION_TO_SOLGUARD_PERCENTAGE = "donation_to_solguard_percentage"
+private const val PREF_KEY_CLUSTER = "cluster"
+
+private const val CLUSTER_DEVNET = "devnet"
+private const val CLUSTER_TESTNET = "testnet"
+private const val CLUSTER_MAINNET_BETA = "mainnet-beta"
 
 class AppSettingsRepositoryImpl(
   private val sharedPreferences: SharedPreferences,
+  private val defaultCluster: Cluster,
 ) : AppSettingsRepository {
 
   private val appSettings by lazy { MutableStateFlow(createSettings()) }
@@ -74,6 +81,11 @@ class AppSettingsRepositoryImpl(
     updateAppSettings()
   }
 
+  override fun setCluster(cluster: Cluster) {
+    sharedPreferences.edit { putString(PREF_KEY_CLUSTER, cluster.asString()) }
+    updateAppSettings()
+  }
+
   private fun updateAppSettings() {
     appSettings.value = createSettings()
   }
@@ -83,8 +95,13 @@ class AppSettingsRepositoryImpl(
       ?.let { PaymentToken.fromAccountAddress(PublicKey.fromBase58(it)) }
       ?: PaymentToken.NATIVE_SOL
 
+    val cluster = sharedPreferences.getString(PREF_KEY_CLUSTER, null)
+      ?.asCluster()
+      ?: defaultCluster
+
     return AppSettings(
       defaultPaymentToken = paymentToken,
+      cluster = cluster,
       increasePaymentOnEachUnblock = sharedPreferences.getBoolean(
         PREF_KEY_INCREASE_PAYMENT_ON_EACH_UNBLOCK,
         true
@@ -106,5 +123,23 @@ class AppSettingsRepositoryImpl(
         AppBlockUnlockConstants.DEFAULT_DONATE_TO_SOLGUARD,
       )
     )
+  }
+
+  private fun Cluster.asString(): String {
+    return when (this) {
+      Cluster.DEVNET -> CLUSTER_DEVNET
+      Cluster.TESTNET -> CLUSTER_TESTNET
+      Cluster.MAINNET_BETA -> CLUSTER_MAINNET_BETA
+      is Cluster.Custom -> error("Can't save custom cluster")
+    }
+  }
+
+  private fun String.asCluster(): Cluster? {
+    return when (this) {
+      CLUSTER_DEVNET -> Cluster.DEVNET
+      CLUSTER_TESTNET -> Cluster.TESTNET
+      CLUSTER_MAINNET_BETA -> Cluster.MAINNET_BETA
+      else -> null
+    }
   }
 }

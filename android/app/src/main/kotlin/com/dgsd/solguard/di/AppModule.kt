@@ -7,6 +7,7 @@ import app.cash.sqldelight.driver.android.AndroidSqliteDriver
 import coil.ImageLoader
 import com.dgsd.ksol.SolanaApi
 import com.dgsd.ksol.core.model.Cluster
+import com.dgsd.solguard.BuildConfig
 import com.dgsd.solguard.SolGuardDatabase
 import com.dgsd.solguard.applock.biometrics.AppLockBiometricManager
 import com.dgsd.solguard.applock.biometrics.AppLockBiometricManagerImpl
@@ -119,7 +120,10 @@ object AppModule {
       }
 
       single<AppSettingsRepository> {
-        AppSettingsRepositoryImpl(get())
+        AppSettingsRepositoryImpl(
+          sharedPreferences = get(),
+          defaultCluster = if (BuildConfig.DEBUG) { Cluster.DEVNET } else { Cluster.MAINNET_BETA }
+        )
       }
 
       single<MobileWalletAdapterAvailabilityManager> {

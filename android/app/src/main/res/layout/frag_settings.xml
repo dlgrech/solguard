@@ -177,7 +177,7 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/settings_row_show_suggestions_notification"
                     style="@style/AppSettingsRow"
-                    android:background="@color/section_color">
+                    android:background="@drawable/rounded_rect_bottom_only_section_color">
 
                     <TextView
                         android:id="@+id/settings_value_show_suggestions_notification"
