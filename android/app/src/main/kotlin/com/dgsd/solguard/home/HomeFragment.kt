@@ -54,17 +54,27 @@ class HomeFragment : Fragment(R.layout.frag_home) {
       viewModel.onBlackoutModeClicked()
     }
 
-    view.requireViewById<View>(R.id.overflow).setOnClickListener {
-      CascadePopupMenu(requireContext(), it).apply {
-        inflate(R.menu.home_overflow_menu)
-        setOnMenuItemClickListener {
-          when (it?.itemId) {
-            R.id.settings -> appCoordinator.navigateToSettings()
-            R.id.history -> appCoordinator.navigateToHistory()
-          }
-          true
+    view.requireViewById<ImageView>(R.id.overflow).apply{
+      if (true) {
+        setImageResource(R.drawable.ic_baseline_settings_24)
+        setOnClickListener {
+          appCoordinator.navigateToSettings()
         }
-        show()
+      } else {
+        // TODO: Re-enable history
+        setOnClickListener {
+          CascadePopupMenu(requireContext(), it).apply {
+            inflate(R.menu.home_overflow_menu)
+            setOnMenuItemClickListener {
+              when (it?.itemId) {
+                R.id.settings -> appCoordinator.navigateToSettings()
+                R.id.history -> appCoordinator.navigateToHistory()
+              }
+              true
+            }
+            show()
+          }
+        }
       }
     }
 
