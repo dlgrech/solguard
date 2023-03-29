@@ -65,22 +65,22 @@ class OnboardingAmountInputFragment : Fragment(R.layout.frag_onboarding_amount_i
       message.text = it
     }
 
-    onEach(viewModel.tokenOptions) { options ->
-      amountInputWrapper.setEndIconOnClickListener {
-        showActionSheet(
-          title = null,
-          items = options.map { option ->
-            ActionSheetItem(
-              title = option.displayName,
-              icon = ContextCompat.getDrawable(requireContext(), option.icon),
-              onClick = {
-                viewModel.onTokenOptionClicked(option)
-              }
-            )
-          }.toTypedArray()
-        )
-      }
-    }
+//    onEach(viewModel.tokenOptions) { options ->
+//      amountInputWrapper.setEndIconOnClickListener {
+//        showActionSheet(
+//          title = null,
+//          items = options.map { option ->
+//            ActionSheetItem(
+//              title = option.displayName,
+//              icon = ContextCompat.getDrawable(requireContext(), option.icon),
+//              onClick = {
+//                viewModel.onTokenOptionClicked(option)
+//              }
+//            )
+//          }.toTypedArray()
+//        )
+//      }
+//    }
 
     onEach(viewModel.amountInputHintText) {
       amountInputWrapper.hint = it

@@ -50,6 +50,7 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/settings_row_default_payment_token"
                     style="@style/AppSettingsRow"
+                    android:visibility="gone"
                     android:background="@drawable/rounded_rect_top_only_section_color">
 
                     <TextView
@@ -82,7 +83,7 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/settings_row_increase_payment_on_each_unlock"
                     style="@style/AppSettingsRow"
-                    android:background="@color/section_color">
+                    android:background="@drawable/rounded_rect_top_only_section_color">
 
                     <TextView
                         android:id="@+id/settings_value_increase_payment_on_each_unlock"

@@ -45,22 +45,22 @@ class EnableBlackoutModeBottomSheetFragment : BaseBottomSheetFragment() {
       viewModel.onAmountInputTextChanged(it?.toString().orEmpty())
     }
 
-    onEach(viewModel.tokenOptions) { options ->
-      amountInputWrapper.setEndIconOnClickListener {
-        showActionSheet(
-          title = null,
-          items = options.map { option ->
-            ActionSheetItem(
-              title = option.displayName,
-              icon = ContextCompat.getDrawable(requireContext(), option.icon),
-              onClick = {
-                viewModel.onTokenOptionClicked(option)
-              }
-            )
-          }.toTypedArray()
-        )
-      }
-    }
+//    onEach(viewModel.tokenOptions) { options ->
+//      amountInputWrapper.setEndIconOnClickListener {
+//        showActionSheet(
+//          title = null,
+//          items = options.map { option ->
+//            ActionSheetItem(
+//              title = option.displayName,
+//              icon = ContextCompat.getDrawable(requireContext(), option.icon),
+//              onClick = {
+//                viewModel.onTokenOptionClicked(option)
+//              }
+//            )
+//          }.toTypedArray()
+//        )
+//      }
+//    }
 
 
     onEach(viewModel.amountInputHintText) {
