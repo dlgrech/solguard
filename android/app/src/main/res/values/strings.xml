@@ -184,4 +184,8 @@
     <string name="how_it_works_message_limit_yourself">Want to go past your limit for the day? You can do that, but it\'s going to cost you. Use your favourite Solana Wallet to pay a donation and your app will unlock.</string>
     <string name="how_it_works_message_feel_good">If you stick to your goals, great! You\'re on your way into breaking your addictive habits and using your phone less.\n\nIf you\'re having troubles, you can feel good knowing that your fees are distributed to a range of vetted charities.</string>
     <string name="how_it_works_title_feel_good">Feel good!</string>
+
+    <string name="accessibility_service_config_intro">Keep track of which apps are being opened</string>
+    <string name="accessibility_service_config_summary">Monitoring app opens</string>
+    <string name="accessibility_service_config_description">SolGuard uses this permission to keep track of which apps are being opened throughout the day</string>
 </resources>
