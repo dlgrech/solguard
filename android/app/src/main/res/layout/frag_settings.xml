@@ -114,7 +114,8 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/settings_row_show_warning_notification"
                     style="@style/AppSettingsRow"
-                    android:background="@color/section_color">
+                    android:background="@color/section_color"
+                    android:visibility="gone">
 
                     <TextView
                         android:id="@+id/settings_value_show_warning_notification"
