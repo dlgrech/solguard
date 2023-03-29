@@ -18,3 +18,16 @@ allprojects {
         mavenLocal()
     }
 }
+
+subprojects {
+    ext {
+        config = [
+                releaseSigning: [
+                        storeFile    : System.getenv('RELEASE_STORE_FILE'),
+                        storePassword: System.getenv('RELEASE_STORE_PASSWORD'),
+                        alias        : System.getenv('RELEASE_KEY_ALIAS'),
+                        aliasPassword: System.getenv('RELEASE_KEY_ALIAS_PASSWORD')
+                ],
+        ]
+    }
+}

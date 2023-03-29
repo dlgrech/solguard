@@ -1,7 +1,7 @@
 plugins {
     id "com.android.application"
     id "org.jetbrains.kotlin.android"
-    id "org.jetbrains.kotlin.plugin.serialization"  version libs.versions.kotlin
+    id "org.jetbrains.kotlin.plugin.serialization" version libs.versions.kotlin
     id "app.cash.sqldelight" version libs.versions.sqldelight
 }
 
@@ -9,6 +9,17 @@ android {
     compileSdk 33
 
     namespace "com.dgsd.solguard"
+
+    signingConfigs {
+        release {
+            if (config.releaseSigning.storePassword != null) {
+                storeFile file(config.releaseSigning.storeFile)
+                storePassword config.releaseSigning.storePassword
+                keyAlias config.releaseSigning.alias
+                keyPassword config.releaseSigning.aliasPassword
+            }
+        }
+    }
 
     defaultConfig {
         applicationId "com.dgsd.solguard"
@@ -20,7 +31,9 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
+            shrinkResources true
+            signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
         debug {
