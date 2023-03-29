@@ -3,6 +3,7 @@ package com.dgsd.solguard.guard.block
 import android.accessibilityservice.AccessibilityService
 import android.accessibilityservice.AccessibilityServiceInfo
 import android.content.Context
+import android.provider.Settings
 import android.view.accessibility.AccessibilityEvent
 import android.view.accessibility.AccessibilityManager
 import com.dgsd.solguard.guard.block.manager.AppBlockManager
@@ -72,15 +73,12 @@ class AppBlockAccessibilityService : AccessibilityService() {
     private const val INPUT_SERVICE_CLASS_NAME = "android.inputmethodservice.SoftInputWindow"
 
     fun isEnabled(context: Context): Boolean {
-      val accessibilityManager =
-        context.getSystemService(Context.ACCESSIBILITY_SERVICE) as AccessibilityManager
-      val enabledServices = accessibilityManager.getEnabledAccessibilityServiceList(
-        AccessibilityServiceInfo.FEEDBACK_ALL_MASK
-      )
+      val enabledServicesString = Settings.Secure.getString(
+        context.contentResolver,
+        Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES
+      ).orEmpty()
 
-      return enabledServices.any {
-        it.resolveInfo.serviceInfo.packageName == context.packageName
-      }
+      return enabledServicesString.contains(context.packageName)
     }
   }
 }
