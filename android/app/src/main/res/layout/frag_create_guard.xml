@@ -9,7 +9,7 @@
         android:id="@+id/blurred_background"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:alpha="0.9"
+        android:alpha="@dimen/create_guard_background_alpha"
         android:background="?android:windowBackground" />
 
     <ImageView
