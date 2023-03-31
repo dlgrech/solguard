@@ -9,6 +9,7 @@ import androidx.lifecycle.lifecycleScope
 import com.dgsd.solguard.AppCoordinator.Destination
 import com.dgsd.solguard.AppCoordinator.Destination.BottomSheetDestination
 import com.dgsd.solguard.AppCoordinator.Destination.InlineDestination
+import com.dgsd.solguard.analytics.SolguardScreenAnalyticsManager
 import com.dgsd.solguard.applock.BiometricChallengeFragment
 import com.dgsd.solguard.common.flow.onEach
 import com.dgsd.solguard.common.fragment.generateTag
@@ -22,10 +23,15 @@ import com.dgsd.solguard.home.HomeFragment
 import com.dgsd.solguard.howitworks.HowItWorksFragment
 import com.dgsd.solguard.onboarding.OnboardingContainerFragment
 import com.dgsd.solguard.settings.SettingsFragment
+import org.koin.android.scope.AndroidScopeComponent
+import org.koin.androidx.scope.activityScope
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), AndroidScopeComponent {
 
+  override val scope by activityScope()
+
+  private val analytics by scope.inject<SolguardScreenAnalyticsManager>()
   private val appCoordinator: AppCoordinator by viewModel()
 
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,6 +39,8 @@ class MainActivity : AppCompatActivity() {
     super.onCreate(null)
 
     setContentView(R.layout.act_main)
+
+    analytics.monitorFragmentScreens()
 
     onEach(appCoordinator.destination) {
       onDestinationChanged(it)

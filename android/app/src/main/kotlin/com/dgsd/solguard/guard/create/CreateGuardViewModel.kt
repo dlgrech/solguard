@@ -37,7 +37,7 @@ class CreateGuardViewModel(
   private val existingAppLaunchGuardResourceConsumer =
     ResourceFlowConsumer<AppLaunchGuard?>(viewModelScope)
 
-  private val selectedApp = MutableStateFlow<InstalledAppInfo?>(null)
+  val selectedApp = MutableStateFlow<InstalledAppInfo?>(null)
   private val launchCount = MutableStateFlow(DEFAULT_LAUNCH_COUNT)
   private val paymentAmount = MutableStateFlow<TokenAmount?>(null)
 
@@ -53,7 +53,7 @@ class CreateGuardViewModel(
   private val _showPaymentAmountSelection = MutableEventFlow<TokenAmount?>()
   val showPaymentAmountSelection = _showPaymentAmountSelection.asEventFlow()
 
-  private val isEditingExistingGuard = MutableStateFlow(false)
+  val isEditingExistingGuard = MutableStateFlow(editGuardForPackageName != null)
 
   val inputText = combine(
     isEditingExistingGuard,

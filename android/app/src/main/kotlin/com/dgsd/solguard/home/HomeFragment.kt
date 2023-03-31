@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.dgsd.solguard.AppCoordinator
 import com.dgsd.solguard.R
+import com.dgsd.solguard.analytics.SolguardAnalyticsManager
 import com.dgsd.solguard.common.flow.onEach
 import com.dgsd.solguard.common.intent.IntentFactory
 import com.dgsd.solguard.common.modalsheet.extensions.showModal
@@ -33,6 +34,8 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeFragment : Fragment(R.layout.frag_home) {
 
+  private val analyticsManager by inject<SolguardAnalyticsManager>()
+
   private val appCoordinator by activityViewModel<AppCoordinator>()
   private val viewModel by viewModel<HomeViewModel>()
   private val intentFactory by inject<IntentFactory>()
@@ -47,15 +50,18 @@ class HomeFragment : Fragment(R.layout.frag_home) {
     val blackoutModeButton = view.requireViewById<ImageView>(R.id.blackout_mode)
 
     view.requireViewById<ExtendedFloatingActionButton>(R.id.create_new).setOnClickListener {
+      analyticsManager.logClick("create_new")
       appCoordinator.navigateToNewGuard()
     }
 
     blackoutModeButton.setOnClickListener {
+      analyticsManager.logClick("blackout_mode")
       viewModel.onBlackoutModeClicked()
     }
 
-    view.requireViewById<ImageView>(R.id.overflow).apply{
+    view.requireViewById<ImageView>(R.id.overflow).apply {
       if (true) {
+        analyticsManager.logClick("settings")
         setImageResource(R.drawable.ic_baseline_settings_24)
         setOnClickListener {
           appCoordinator.navigateToSettings()
@@ -127,20 +133,35 @@ class HomeFragment : Fragment(R.layout.frag_home) {
 
     val adapter = HomeTabAdapter(
       onExistingAppGuardClicked = { item ->
+        analyticsManager.logClick("existing_guard") {
+          put("package", item.packageName)
+        }
+
         itemTouchHelper.clearSelection()
         viewModel.onAppGuardClicked(item)
       },
       onEnableAccessibilityServiceClicked = {
+        analyticsManager.logClick("enable_accessibility_service")
         itemTouchHelper.clearSelection()
         startActivity(intentFactory.createAccessibilitySettingsIntent())
       },
       onExistingAppGuardDeleteClicked = { packageName ->
+        analyticsManager.logClick("delete_guard") {
+          put("package", packageName)
+        }
         viewModel.onDeleteExistingAppGuardClicked(packageName)
       },
       onExistingAppGuardBlackoutClicked = { item ->
+        analyticsManager.logClick("existing_app_blackout") {
+          put("package", item.packageName)
+        }
+
         showConfirmAppBlackoutMode(item, itemTouchHelper)
       },
       onExistingAppGuardEnableDisableClicked = { packageName ->
+        analyticsManager.logClick("disableguard") {
+          put("package", packageName)
+        }
         viewModel.onToggleExistingAppGuardEnabledClicked(packageName)
       }
     )

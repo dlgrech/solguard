@@ -8,6 +8,8 @@ buildscript {
     dependencies {
         classpath libs.gradle.kotlin
         classpath libs.android.tools
+        classpath libs.firebase.crashlytics.gradle
+        classpath libs.google.gms
     }
 }
 

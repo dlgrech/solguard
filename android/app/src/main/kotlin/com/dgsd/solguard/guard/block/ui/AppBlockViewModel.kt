@@ -35,7 +35,7 @@ import kotlinx.coroutines.flow.*
 
 class AppBlockViewModel(
   application: Application,
-  private val packageName: String,
+  val packageName: String,
   private val isForBlackoutDisableOnly: Boolean,
   private val isForInApp: Boolean,
   private val clock: Clock,

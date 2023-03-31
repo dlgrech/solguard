@@ -20,6 +20,7 @@ import androidx.lifecycle.lifecycleScope
 import coil.load
 import com.airbnb.lottie.LottieAnimationView
 import com.dgsd.solguard.R
+import com.dgsd.solguard.analytics.SolguardAnalyticsManager
 import com.dgsd.solguard.charity.CharityInfoBottomSheet
 import com.dgsd.solguard.common.bottomsheet.BaseBottomSheetFragment
 import com.dgsd.solguard.common.flow.onEach
@@ -43,6 +44,8 @@ class AppBlockBottomSheetFragment : BaseBottomSheetFragment() {
   private val intentFactory by inject<IntentFactory>()
 
   private val mobileWalletAdapter by inject<MobileWalletAdapter>()
+
+  private val analyticsManager by inject<SolguardAnalyticsManager>()
 
   private lateinit var activityResultSender: ActivityResultSender
 
@@ -89,6 +92,13 @@ class AppBlockBottomSheetFragment : BaseBottomSheetFragment() {
     activityResultSender = ActivityResultSender(requireActivity())
   }
 
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    analyticsManager.logEvent("app_block_shown") {
+      put("package", viewModel.packageName)
+    }
+  }
+
   override fun onCreateView(
     inflater: LayoutInflater,
     container: ViewGroup?,
@@ -118,18 +128,22 @@ class AppBlockBottomSheetFragment : BaseBottomSheetFragment() {
     val charityCardMessage = view.requireViewById<TextView>(R.id.charity_card_message)
 
     closeButton.setOnClickListener {
+      analyticsManager.logClick("close")
       dismissAllowingStateLoss()
     }
 
     doneButton.setOnClickListener {
+      analyticsManager.logClick("done")
       dismissAllowingStateLoss()
     }
 
     charityCard.setOnClickListener {
+      analyticsManager.logClick("charity_card")
       viewModel.onCharityCardClicked()
     }
 
     payButton.setOnClickListener {
+      analyticsManager.logClick("pay")
       viewLifecycleOwner.lifecycleScope.launchWhenResumed {
         val result = mobileWalletAdapter.transact(activityResultSender) {
           viewModel.onPayButtonClicked(this)
@@ -176,12 +190,17 @@ class AppBlockBottomSheetFragment : BaseBottomSheetFragment() {
     }
 
     onEach(viewModel.showSuccess) { (message, transactionSignature, rpcCluster) ->
+      analyticsManager.logEvent("unlock_success") {
+        put("package", viewModel.packageName)
+      }
+
       successText.text = message
       successContent.isVisible = true
       blockContent.isInvisible = true
       successAnimation.playAnimation()
 
       viewTransaction.setOnClickListener {
+        analyticsManager.logClick("view_transaction")
         startActivity(
           intentFactory.createViewTransactionIntent(transactionSignature, rpcCluster.name)
         )

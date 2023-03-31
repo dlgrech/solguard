@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.dgsd.solguard.R
+import com.dgsd.solguard.analytics.SolguardAnalyticsManager
 import com.dgsd.solguard.common.flow.onEach
 import com.dgsd.solguard.common.fragment.navigateBack
 import com.dgsd.solguard.common.modalsheet.extensions.showModalFromErrorMessage
@@ -14,9 +15,12 @@ import com.dgsd.solguard.common.ui.getColorAttr
 import com.dgsd.solguard.di.util.parentViewModel
 import com.dgsd.solguard.onboarding.OnboardingCoordinator
 import com.google.android.material.appbar.MaterialToolbar
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class OnboardingAppSelectionFragment : Fragment(R.layout.frag_onboarding_app_selection) {
+
+  private val analyticsManager by inject<SolguardAnalyticsManager>()
 
   private val coordinator by parentViewModel<OnboardingCoordinator>()
   private val viewModel by viewModel<OnboardingAppSelectionViewModel>()
@@ -33,6 +37,10 @@ class OnboardingAppSelectionFragment : Fragment(R.layout.frag_onboarding_app_sel
 
     val adapter = OnboardingAppSelectionAdapter(
       onAppClicked = { appInfo ->
+        analyticsManager.logClick("app") {
+          put("package", appInfo.packageName)
+        }
+
         coordinator.navigateWithApp(appInfo)
       },
     )

@@ -46,3 +46,8 @@ cascade = "me.saket.cascade:cascade:2.0.0-rc02"
 retrofit = "com.squareup.retrofit2:retrofit:2.9.0"
 retrofit-kotlin-converter = "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0"
 kotlinx-json = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.0"
+
+firebase-analytics-ktx = "com.google.firebase:firebase-analytics-ktx:21.2.1"
+firebase-crashlytics-ktx = "com.google.firebase:firebase-crashlytics-ktx:18.3.6"
+firebase-crashlytics-gradle = "com.google.firebase:firebase-crashlytics-gradle:2.9.4"
+google-gms = "com.google.gms:google-services:4.3.15"

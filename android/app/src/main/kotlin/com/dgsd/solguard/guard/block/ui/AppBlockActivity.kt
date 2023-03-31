@@ -6,19 +6,27 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import com.dgsd.solguard.analytics.SolguardScreenAnalyticsManager
 import com.dgsd.solguard.common.intent.IntentFactory
 import org.koin.android.ext.android.inject
+import org.koin.android.scope.AndroidScopeComponent
+import org.koin.androidx.scope.activityScope
 
 private const val EXTRA_PACKAGE_BEING_BLOCKED = "EXTRA_PACKAGE_BEING_BLOCKED"
 private const val EXTRA_IS_FOR_DISABLE = "EXTRA_IS_FOR_DISABLE"
 private const val EXTRA_HOME_ON_DISMISS = "EXTRA_HOME_ON_DISMISS"
 
-class AppBlockActivity : AppCompatActivity() {
+class AppBlockActivity : AppCompatActivity(), AndroidScopeComponent {
 
+  override val scope by activityScope()
+
+  private val analytics by scope.inject<SolguardScreenAnalyticsManager>()
   private val intentFactory by inject<IntentFactory>()
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
+
+    analytics.monitorFragmentScreens()
 
     val isForDisableOnly = intent.getBooleanExtra(EXTRA_IS_FOR_DISABLE, false)
     val packageName = intent.getStringExtra(EXTRA_PACKAGE_BEING_BLOCKED)

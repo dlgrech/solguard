@@ -8,7 +8,10 @@ import coil.ImageLoader
 import com.dgsd.ksol.SolanaApi
 import com.dgsd.ksol.core.model.Cluster
 import com.dgsd.solguard.BuildConfig
+import com.dgsd.solguard.MainActivity
 import com.dgsd.solguard.SolGuardDatabase
+import com.dgsd.solguard.analytics.SolguardAnalyticsManager
+import com.dgsd.solguard.analytics.SolguardScreenAnalyticsManager
 import com.dgsd.solguard.applock.biometrics.AppLockBiometricManager
 import com.dgsd.solguard.applock.biometrics.AppLockBiometricManagerImpl
 import com.dgsd.solguard.common.clock.Clock
@@ -22,9 +25,11 @@ import com.dgsd.solguard.data.cache.InstalledAppsCache
 import com.dgsd.solguard.guard.block.manager.AppBlockManager
 import com.dgsd.solguard.guard.block.manager.AppBlockManagerImpl
 import com.dgsd.solguard.guard.block.manager.AppBlockStrategyFactory
+import com.dgsd.solguard.guard.block.ui.AppBlockActivity
 import com.dgsd.solguard.guard.notifications.AppBlockNotificationManager
 import com.dgsd.solguard.mwa.MobileWalletAdapterAvailabilityManager
 import com.dgsd.solguard.mwa.MobileWalletAdapterAvailabilityManagerImpl
+import com.google.firebase.analytics.FirebaseAnalytics
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import com.solana.mobilewalletadapter.clientlib.MobileWalletAdapter
 import kotlinx.coroutines.Dispatchers
@@ -33,6 +38,7 @@ import okhttp3.Cache
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import org.koin.core.module.Module
+import org.koin.core.module.dsl.scopedOf
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 import retrofit2.Retrofit
@@ -155,6 +161,10 @@ object AppModule {
         AppLockBiometricManagerImpl(get())
       }
 
+      single<FirebaseAnalytics> {
+        FirebaseAnalytics.getInstance(get())
+      }
+
       singleOf(::AppConfigCache)
       singleOf(::InstalledAppsCache)
       singleOf(::AppBlockNotificationManager)
@@ -162,6 +172,14 @@ object AppModule {
       singleOf(::AppBlockStrategyFactory)
       singleOf(::IntentFactory)
       singleOf(::PermissionsManager)
+      singleOf(::SolguardAnalyticsManager)
+
+      scope<MainActivity> {
+        scopedOf(::SolguardScreenAnalyticsManager)
+      }
+      scope<AppBlockActivity> {
+        scopedOf(::SolguardScreenAnalyticsManager)
+      }
     }
   }
 }

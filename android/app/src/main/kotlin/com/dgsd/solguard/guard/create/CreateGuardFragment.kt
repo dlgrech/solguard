@@ -10,12 +10,14 @@ import androidx.core.view.children
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.dgsd.solguard.R
+import com.dgsd.solguard.analytics.SolguardAnalyticsManager
 import com.dgsd.solguard.common.flow.onEach
 import com.dgsd.solguard.common.fragment.navigateBack
 import com.dgsd.solguard.common.modalsheet.extensions.showModalFromErrorMessage
 import com.dgsd.solguard.common.ui.blur
 import com.dgsd.solguard.common.ui.unblur
 import com.google.android.material.snackbar.Snackbar
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
@@ -23,8 +25,17 @@ private const val ARGS_PACKAGE_TO_EDIT = "package_to_edit"
 
 class CreateGuardFragment : Fragment(R.layout.frag_create_guard) {
 
+  private val analyticsManager by inject<SolguardAnalyticsManager>()
+
   private val viewModel by viewModel<CreateGuardViewModel> {
     parametersOf(arguments?.getString(ARGS_PACKAGE_TO_EDIT))
+  }
+
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    analyticsManager.logEvent("creation_screen_shown") {
+      put("is_editing", viewModel.isEditingExistingGuard.value.toString())
+    }
   }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -77,6 +88,13 @@ class CreateGuardFragment : Fragment(R.layout.frag_create_guard) {
     }
 
     onEach(viewModel.closeOnSuccess) { message ->
+      analyticsManager.logEvent("guard_saved") {
+        val packageName = viewModel.selectedApp.value?.packageName
+        if (packageName != null) {
+          put("package", packageName)
+        }
+      }
+
       Snackbar.make(
         view.parent as View,
         message,
